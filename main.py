@@ -2,9 +2,10 @@ import socket
 
 
 def server():
-    host = socket.gethostname()  # get local machine name
+   # host = socket.gethostname()  # get local machine name
+    host = "192.168.0.94"
     print(host)
-    port = 8080  # Make sure it's within the > 1024 $$ <65535 range
+    port = 8060  # Make sure it's within the > 1024 $$ <65535 range
 
     s = socket.socket()
     s.bind((host, port))
