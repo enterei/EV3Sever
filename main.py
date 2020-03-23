@@ -14,12 +14,10 @@ def server():
     client_socket, adress = s.accept()
     print("Connection from: " + str(adress))
     while True:
-        data = c.recv(1024).decode('utf-8')
-        if not data:
-            break
-        print('From online user: ' + data)
-        data = data.upper()
-        c.send(data.encode('utf-8'))
+        c, addr = s.accept()  # Establish a connection with the client
+        print "Got connection from", addr
+        c.send("Thank you for connecting!")
+        c.close()
     c.close()
 
 
