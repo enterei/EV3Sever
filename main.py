@@ -1,18 +1,26 @@
-#!/usr/bin/env python3
-
 import socket
 
-HOST = '127.0.0.1'  # Standard loopback interface address (localhost)
-PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.bind((HOST, PORT))
-    s.listen()
-    conn, addr = s.accept()
-    with conn:
-        print('Connected by', addr)
-        while True:
-            data = conn.recv(1024)
-            if not data:
-                break
-            conn.sendall(data)
+def server():
+    host = socket.gethostname()  # get local machine name
+    print(host)
+    port = 8080  # Make sure it's within the > 1024 $$ <65535 range
+
+    s = socket.socket()
+    s.bind((host, port))
+
+    s.listen(1)
+    client_socket, adress = s.accept()
+    print("Connection from: " + str(adress))
+    while True:
+        data = c.recv(1024).decode('utf-8')
+        if not data:
+            break
+        print('From online user: ' + data)
+        data = data.upper()
+        c.send(data.encode('utf-8'))
+    c.close()
+
+
+if __name__ == '__main__':
+    server()
