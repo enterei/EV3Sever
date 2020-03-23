@@ -15,7 +15,7 @@ def server():
     print("Connection from: " + str(adress))
     while True:
         c, addr = s.accept()  # Establish a connection with the client
-        print "Got connection from", addr
+        print ("Got connection from", addr)
         c.send("Thank you for connecting!")
         c.close()
     c.close()
