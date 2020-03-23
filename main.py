@@ -1,2 +1,2 @@
 print("fuck")
-print("deine mudda")
+print("deine mudda zum teufel")
