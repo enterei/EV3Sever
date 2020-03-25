@@ -37,9 +37,10 @@ def service_connection(key, mask):
 
 if len(sys.argv) != 3:
     print("usage:", sys.argv[0], "<host> <port>")
-    sys.exit(1)
+    host = '192.168.0.94'
+    port = '6664'
 
-host, port = sys.argv[1], int(sys.argv[2])
+#host, port = sys.argv[1], int(sys.argv[2])
 lsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 lsock.bind((host, port))
 lsock.listen()
