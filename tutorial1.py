@@ -6,7 +6,7 @@ from filecount import filecount
 def collect_data():
     filename = 'Sensor_data_'+ str(filecount())+'.csv'
     with open(filename, 'w', newline='') as csvfile:
-
+        c = 0
         spamwriter = csv.writer(csvfile, delimiter=' ',
                                 quotechar='|', quoting=csv.QUOTE_MINIMAL)
         spamwriter.writerow('NEW ROW')
@@ -36,6 +36,8 @@ def collect_data():
                     if not data:
                         print("ok jetzt hier")
                     if data:
+                        print(rd)
                         spamwriter.writerow('')
                         spamwriter.writerow(v for v in rd)
-                        conn.sendall(data)
+                        conn.sendall(rd)
+                        data =[]
