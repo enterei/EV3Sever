@@ -31,8 +31,9 @@ def collect_data():
                     for v in data:
                         rd.append(int(v))
 
-                    spamwriter.writerow(v for v in rd)
+
                     if not data:
                         print("ok jetzt hier")
                     if data:
+                        spamwriter.writerow(v for v in rd)
                         conn.sendall(data)
