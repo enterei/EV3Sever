@@ -4,7 +4,7 @@ import socket
 import csv
 from filecount import filecount
 def collect_data():
-    filename = 'Sensor_data_'+ str(filecount()+'.csv')
+    filename = 'Sensor_data_'+ str(filecount())+'.csv'
     with open(filename, 'w', newline='') as csvfile:
 
         spamwriter = csv.writer(csvfile, delimiter=' ',
