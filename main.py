@@ -1,5 +1,5 @@
 import socket
-
+from tutorial1 import collect_data
 
 def server():
    # host = socket.gethostname()  # get local machine name
@@ -22,4 +22,5 @@ def server():
 
 
 if __name__ == '__main__':
-    server()
+    #server()
+    collect_data()

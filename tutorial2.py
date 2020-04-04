@@ -41,9 +41,10 @@ if len(sys.argv) != 3:
     port = 6664
 
 #host, port = sys.argv[1], int(sys.argv[2])
+#The arguments passed to socket() specify the address family and socket type. AF_INET is the Internet address family for IPv4. SOCK_STREAM is the socket type for TCP,
 lsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-lsock.bind((host, port))
-lsock.listen()
+lsock.bind((host, port))#makes accept connectuiobs
+lsock.listen() #
 print("listening on", (host, port))
 lsock.setblocking(False)
 sel.register(lsock, selectors.EVENT_READ, data=None)
