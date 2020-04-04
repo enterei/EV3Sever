@@ -29,12 +29,13 @@ def collect_data():
                     data = conn.recv(1024)
                     rd = []
                     for v in data:
-                        spamwriter.writerow('')
+
                         rd.append(int(v))
 
 
                     if not data:
                         print("ok jetzt hier")
                     if data:
+                        spamwriter.writerow('')
                         spamwriter.writerow(v for v in rd)
                         conn.sendall(data)
