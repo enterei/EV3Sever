@@ -32,5 +32,6 @@ def collect_data():
 
                     spamwriter.writerow(v for v in rd)
                     if not data:
+                        print("ok jetzt hier")
                         break
                     conn.sendall(data)
