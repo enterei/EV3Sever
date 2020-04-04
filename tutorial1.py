@@ -26,8 +26,11 @@ def collect_data():
                 print('Connected by', addr)
                 while True:
                     data = conn.recv(1024)
-                    print(data)
-                    spamwriter.writerow(int(v) for v in data.split())
+                    rd = []
+                    for v in data:
+                        rd.append(int(v))
+
+                    spamwriter.writerow(v for v in rd)
                     if not data:
                         break
                     conn.sendall(data)
