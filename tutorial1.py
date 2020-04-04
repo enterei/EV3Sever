@@ -39,5 +39,5 @@ def collect_data():
                         print(rd)
                         spamwriter.writerow('')
                         spamwriter.writerow(v for v in rd)
-                        conn.sendall(rd)
+                      #  conn.sendall(rd)
                         data =[]
