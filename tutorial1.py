@@ -25,10 +25,11 @@ def collect_data():
             with conn:
                 print('Connected by', addr)
                 while True:
-                    print("ga")
+                    #print("ga")
                     data = conn.recv(1024)
                     rd = []
                     for v in data:
+                        spamwriter.writerow('')
                         rd.append(int(v))
 
 
