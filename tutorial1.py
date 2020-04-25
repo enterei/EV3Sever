@@ -25,13 +25,15 @@ def collect_data():
                 rd = []
                 a_dict = json.loads(data)
                 print(dict(a_dict))
-                for v in data:
-                    rd.append(int(v))
+                print("ga")
+               # for v in data:
+
+                #    rd.append(int(v))
 
                 #if not data
                    # print("ok jetzt hier")
-                if data:
-                    print(rd)
+                #if data:
+#                    print(rd)
 
                     #  conn.sendall(rd)
-                    data = []
+                 #   data = []
