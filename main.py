@@ -3,7 +3,7 @@ from tutorial1 import collect_data
 
 def server():
    # host = socket.gethostname()  # get local machine name
-    host = "192.168.0.94"
+    host = "192.168.0.179"
     print(host)
     port = 8060  # Make sure it's within the > 1024 $$ <65535 range
 
