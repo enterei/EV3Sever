@@ -21,7 +21,7 @@ def collect_data():
                 # print("ga")
                 data = conn.recv(1024)
                 rd = []
-                a_dict = json.loads(data.decode())
+                a_dict = json.loads(data.decode("ascii"))
                 print(dict(a_dict))
                 for v in data:
                     rd.append(int(v))
