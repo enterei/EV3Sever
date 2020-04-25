@@ -26,6 +26,7 @@ def collect_data():
                 a_dict = json.loads(data)
                 print(dict(a_dict))
                 print("ga")
+                print(a_dict.get('id'))
                # for v in data:
 
                 #    rd.append(int(v))
