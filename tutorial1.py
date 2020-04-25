@@ -27,6 +27,11 @@ def collect_data():
                 print(dict(a_dict))
                 print("ga")
                 print(a_dict.get('id'))
+                if(a_dict.get('id')=="ecke"):
+                    res={'zug':'vor'}
+                    serialized_dict = json.dumps(res).encode("ascii")
+
+                    conn.sendall(serialized_dict)
                # for v in data:
 
                 #    rd.append(int(v))
