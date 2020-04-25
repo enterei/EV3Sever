@@ -11,9 +11,11 @@ def collect_data():
     PORT = 65432  # Port to listen on (non-privileged ports are > 1023)
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        print(HOST)
+        print(PORT)
         s.bind((HOST, PORT))
         s.listen()
-        print('running')
+        print('runnings')
         conn, addr = s.accept()
         with conn:
             print('Connected by', addr)
