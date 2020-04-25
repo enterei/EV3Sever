@@ -23,7 +23,7 @@ def collect_data():
                 for v in data:
                     rd.append(int(v))
 
-                if not data:
+                #if not data
                    # print("ok jetzt hier")
                 if data:
                     print(rd)
