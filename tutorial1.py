@@ -32,6 +32,7 @@ def collect_data():
                     serialized_dict = json.dumps(res).encode("ascii")
 
                     conn.sendall(serialized_dict)
+                    print("here")
                # for v in data:
 
                 #    rd.append(int(v))
