@@ -1,5 +1,6 @@
 import selectors
 import socket
+import types
 
 def accept_wrapper(sock):
     conn, addr = sock.accept()  # Should be ready to read
