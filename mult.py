@@ -12,6 +12,7 @@ def accept_wrapper(sock):
 def service_connection(key, mask,out):
     sock = key.fileobj
     data = key.data
+    data.outb=out
     if mask & selectors.EVENT_READ:
         recv_data = sock.recv(1024)  # Should be ready to read
         if recv_data:
@@ -46,5 +47,5 @@ while True:
         if key.data is None:
             accept_wrapper(key.fileobj)
         else:
-            TTT.doSomething(service_connection(key, mask))
-
+            m= TTT.doSomething(service_connection(key, mask,None))
+            service_connection(key,mask,m)
