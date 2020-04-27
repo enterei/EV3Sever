@@ -1,7 +1,7 @@
 import selectors
 import socket
 import types
-
+from TTT import TTT
 def accept_wrapper(sock):
     conn, addr = sock.accept()  # Should be ready to read
     print('accepted connection from', addr)
@@ -9,13 +9,14 @@ def accept_wrapper(sock):
     data = types.SimpleNamespace(addr=addr, inb=b'', outb=b'')
     events = selectors.EVENT_READ | selectors.EVENT_WRITE
     sel.register(conn, events, data=data)
-def service_connection(key, mask):
+def service_connection(key, mask,out):
     sock = key.fileobj
     data = key.data
     if mask & selectors.EVENT_READ:
         recv_data = sock.recv(1024)  # Should be ready to read
         if recv_data:
-            data.outb += recv_data
+            #data.outb += recv_data
+            print(recv_data.get('Aktion'))
         else:
             print('closing connection to', data.addr)
             sel.unregister(sock)
@@ -25,6 +26,8 @@ def service_connection(key, mask):
             print('echoing', repr(data.outb), 'to', data.addr)
             sent = sock.send(data.outb)  # Should be ready to write
             data.outb = data.outb[sent:]
+            print("server out after send: "+data.out)
+    return recv_data
 sel = selectors.DefaultSelector()
 # ...
 host = '192.168.0.179'  # The server's hostname or IP address
@@ -35,6 +38,7 @@ lsock.listen()
 print('listening on', (host, port))
 lsock.setblocking(False)
 sel.register(lsock, selectors.EVENT_READ, data=None)
+TTT=TTT()
 
 while True:
     events = sel.select(timeout=None)
@@ -42,5 +46,5 @@ while True:
         if key.data is None:
             accept_wrapper(key.fileobj)
         else:
-            service_connection(key, mask)
+            TTT.doSomething(service_connection(key, mask))
 
