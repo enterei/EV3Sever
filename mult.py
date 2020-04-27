@@ -13,6 +13,7 @@ def service_connection(key, mask,out):
     sock = key.fileobj
     data = key.data
     data.outb=out
+    recv_data=None
     if mask & selectors.EVENT_READ:
         recv_data = sock.recv(1024)  # Should be ready to read
         if recv_data:
