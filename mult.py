@@ -15,6 +15,7 @@ def service_connection(key, mask,out):
     data.outb=out
     recv_data=None
     if mask & selectors.EVENT_READ:
+        print("in read")
         recv_data = sock.recv(1024)  # Should be ready to read
         if recv_data:
             #data.outb += recv_data
