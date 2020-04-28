@@ -34,17 +34,17 @@ def service_connection(key, mask):
     return recv_data
 
 
-def send(key, mask):
+def send(key, mask,mes):
     sock = key.fileobj
     data = key.data
     data.out = message
 
     if mask & selectors.EVENT_WRITE:
-        if data.outb:
+        if mes:
             print('echoing', repr(data.outb), 'to', data.addr)
-            sent = sock.send(data.outb)  # Should be ready to write
-            data.outb = data.outb[sent:]
-            print("server out after send: " + data.out)
+            sent = sock.send(mes)  # Should be ready to write
+            mes = data.outb[sent:]
+            print("server out after send: " + mes)
 def rec(key,mask):
     sock = key.fileobj
     data = key.data
@@ -85,4 +85,4 @@ while True:
             message=TTT.doSomething(res)
             if message !=None:
                 print("m!=NOne")
-                send(key,mask)
+                send(key,mask,message)
