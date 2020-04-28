@@ -4,7 +4,7 @@ class TTT:
     def __init__(self, **kwargs):
         print("init")
     def doSomething(self,message):
-        if not message:
+        if  message!= None:
             message = json.loads(message.decode('utf-8'))
             if(message.get('Atktion')==None):
                 print("none")
