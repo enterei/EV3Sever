@@ -84,4 +84,5 @@ while True:
             res=rec(key,mask)
             message=TTT.doSomething(res)
             if message !=None:
+                print("m!=NOne")
                 send(key,mask)

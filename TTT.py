@@ -10,6 +10,7 @@ class TTT:
                 print("none")
                 return None
             if(message.get('Aktion')=="Ecke"):
+                print("sollten hier")
                 return json.dumps({'Aktion':"messen"}).encode('uft-8')
         else:
             return None
