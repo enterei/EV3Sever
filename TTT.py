@@ -12,7 +12,7 @@ class TTT:
                 return None
             if(message.get('Aktion')=="Ecke"):
                 print("sollten hier")
-                return json.dumps({'Aktion':"messen"}).encode('uft-8')
+                return json.dumps({'Aktion':"messen"}).encode('utf-8')
         else:
             #print("message==null")
             return None
