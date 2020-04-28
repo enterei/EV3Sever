@@ -41,10 +41,10 @@ def send(key, mask,mes):
 
     if mask & selectors.EVENT_WRITE:
         if mes:
-            print('echoing', repr(data.outb), 'to', data.addr)
+            print('echoing', repr(mes), 'to', data.addr)
             sent = sock.send(mes)  # Should be ready to write
             mes = data.outb[sent:]
-            print("server out after send: " + mes)
+            print("server out after send: " + repr(mes))
 def rec(key,mask):
     sock = key.fileobj
     data = key.data
