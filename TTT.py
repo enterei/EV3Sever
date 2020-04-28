@@ -7,10 +7,12 @@ class TTT:
         if  message!= None:
             message = json.loads(message.decode('utf-8'))
             if(message.get('Atktion')==None):
-                print("none")
+                print("in none weil aktion null")
                 return None
             if(message.get('Aktion')=="Ecke"):
                 print("sollten hier")
                 return json.dumps({'Aktion':"messen"}).encode('uft-8')
         else:
+            print("message==null")
             return None
+        print("kein if in dosomething")
