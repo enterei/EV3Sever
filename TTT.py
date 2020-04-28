@@ -7,7 +7,7 @@ class TTT:
         if  message!= None:
             message = json.loads(message.decode('utf-8'))
             print("message in != null "+ str(message))
-            if(message.get('Atktion')==None):
+            if(message.get('Aktion')==None):
                 print("in none weil aktion null")
                 return None
             if(message.get('Aktion')=="Ecke"):
