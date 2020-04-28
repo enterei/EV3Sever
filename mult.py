@@ -50,4 +50,3 @@ while True:
             accept_wrapper(key.fileobj)
         else:
             m= TTT.doSomething(service_connection(key, mask,None))
-            service_connection(key,mask,m)
