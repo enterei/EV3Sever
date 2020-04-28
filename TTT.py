@@ -13,6 +13,6 @@ class TTT:
                 print("sollten hier")
                 return json.dumps({'Aktion':"messen"}).encode('uft-8')
         else:
-            print("message==null")
+            #print("message==null")
             return None
         print("kein if in dosomething")
