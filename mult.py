@@ -2,6 +2,7 @@ import selectors
 import socket
 import types
 from TTT import TTT
+message={'aktion':"vor"}
 def accept_wrapper(sock):
     conn, addr = sock.accept()  # Should be ready to read
     print('accepted connection from', addr)
@@ -9,10 +10,10 @@ def accept_wrapper(sock):
     data = types.SimpleNamespace(addr=addr, inb=b'', outb=b'')
     events = selectors.EVENT_READ | selectors.EVENT_WRITE
     sel.register(conn, events, data=data)
-def service_connection(key, mask,out):
+def service_connection(key, mask):
     sock = key.fileobj
     data = key.data
-    data.outb=out
+    data.out=message
     recv_data=None
     if mask & selectors.EVENT_READ:
         print("in read")
@@ -31,6 +32,35 @@ def service_connection(key, mask,out):
             data.outb = data.outb[sent:]
             print("server out after send: "+data.out)
     return recv_data
+
+
+def send(key, mask):
+    sock = key.fileobj
+    data = key.data
+    data.out = message
+
+    if mask & selectors.EVENT_WRITE:
+        if data.outb:
+            print('echoing', repr(data.outb), 'to', data.addr)
+            sent = sock.send(data.outb)  # Should be ready to write
+            data.outb = data.outb[sent:]
+            print("server out after send: " + data.out)
+def rec(key,mask):
+    sock = key.fileobj
+    data = key.data
+    data.out = message
+    recv_data = None
+    if mask & selectors.EVENT_READ:
+        print("in read")
+        recv_data = sock.recv(1024)  # Should be ready to read
+        if recv_data:
+            # data.outb += recv_data
+            print(recv_data)
+        else:
+            print('closing connection to', data.addr)
+            sel.unregister(sock)
+            sock.close()
+
 sel = selectors.DefaultSelector()
 # ...
 host = '192.168.0.179'  # The server's hostname or IP address
@@ -49,4 +79,5 @@ while True:
         if key.data is None:
             accept_wrapper(key.fileobj)
         else:
-            m= TTT.doSomething(service_connection(key, mask,None))
+            #m= TTT.doSomething(service_connection(key, mask))
+            rec(key,mask)
