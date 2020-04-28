@@ -2,7 +2,7 @@ import selectors
 import socket
 import types
 from TTT import TTT
-message={'aktion':"vor"}
+message=None
 def accept_wrapper(sock):
     conn, addr = sock.accept()  # Should be ready to read
     print('accepted connection from', addr)
@@ -56,6 +56,7 @@ def rec(key,mask):
         if recv_data:
             # data.outb += recv_data
             print(recv_data)
+            return recv_data
         else:
             print('closing connection to', data.addr)
             sel.unregister(sock)
@@ -80,4 +81,7 @@ while True:
             accept_wrapper(key.fileobj)
         else:
             #m= TTT.doSomething(service_connection(key, mask))
-            rec(key,mask)
+            res=rec(key,mask)
+            message=TTT.doSomething(res)
+            if message !=None:
+                send(key,mask)
