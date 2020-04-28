@@ -6,7 +6,7 @@ class TTT:
     def doSomething(self,message):
         if  message!= None:
             message = json.loads(message.decode('utf-8'))
-            print("message in != null "+ dict(message))
+            print("message in != null "+ str(message))
             if(message.get('Atktion')==None):
                 print("in none weil aktion null")
                 return None
