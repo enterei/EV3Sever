@@ -1,4 +1,5 @@
 import argparse
+import json
 import selectors
 import socket
 import types
@@ -139,5 +140,7 @@ while True:
                 print(message)
             if message !=None:
                 print("m!=NOne")
+                message=res_bytes = json.dumps(message).encode('utf-8')
                 send(key,mask,message)
+                message=None
 

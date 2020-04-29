@@ -13,7 +13,7 @@ class TestHandler:
 
     def straight(self):
         message= self.default_message
-        message['Bewegung':'straight']
-        message['way':'s']
+        message['Bewegung']='straight'
+        message['way']='s'
         print(message)
         return message
