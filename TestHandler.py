@@ -15,6 +15,6 @@ class TestHandler:
         message= self.default_message
         message['Bewegung']='straight'
         message['way']='s'
-        message.upgrade(self.move_message)
+        message.update(self.move_message)
         print(message)
         return message
