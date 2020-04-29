@@ -1,0 +1,178 @@
+from random import randrange
+
+v0 = [0, 1, 2]
+v1 = [3, 4, 5]
+v2 = [6, 7, 8]
+
+v3 = [0, 3, 6]
+v4 = [1, 4, 7]
+v5 = [2, 5, 8]
+
+v6 = [0, 4, 8]
+v7 = [6, 4, 2]
+
+
+class GameHandler:
+    field = []
+    turn = 0   #todo change turn
+    first = "E"
+
+    stragity = None
+    winner = None
+    vcs = [v0, v1, v2, v3, v4, v5, v6, v7]  # Win Conwhile
+
+
+
+
+    my_opportunity = []
+    enemy_oppertunitiy = []
+
+
+    def __init__(self, kfirst="M", **kwargs):
+        self.first = kfirst
+        self.vcs = [v0, v1, v2, v3, v4, v5, v6, v7]
+        self.my_oppertunitiy = []
+        self.enemy_oppertunitiy = []
+        self.winner = None
+        self.field = []
+        self.game_on = True
+        for i in range(9):
+            self.field.append("N")  # neutral
+        print("feld laenge: " + str(len(self.field)))
+        if self.first == "M":  # me
+            self.stragity = randrange(0, 2, 1)  # 1 = Middle, 2 = Corner
+
+
+    def thinkMove(self, new_markedf_field_number):  # new
+        enemy_option = self.checkOpportunity("E")
+        if enemy_option != None:
+            print("enemy option: " + str(enemy_option))
+            return enemy_option
+        my_option = self.checkOpportunity("M")
+        if my_option != None:
+            print("my option: " + str(my_option))
+            return my_option
+        # if self.stragity != None:
+        #   return self.getStragityMove() todo
+        try_number = randrange(0, 8, 1)
+        while self.field[try_number] != "N":
+            try_number = randrange(0, 8, 1)
+        print("random option: " + str(try_number))
+        return try_number
+
+        # return taret_field_number
+
+
+    def getMove(self, new_marked_field_number):
+        if new_marked_field_number != None:
+            if not self.tagField(new_marked_field_number, "E"):  # enemy Move
+                print("wrong move by: " + str("E"))
+                self.wins("M")
+                return False
+        if self.checkEnd():  # check if game ended  Enemy Won?
+            return False
+        zug = self.thinkMove(new_marked_field_number)
+        if not self.tagField(zug, "M"):  # myMove
+            print("Wrong move by M")
+            self.wins("E")
+            return False
+        if self.checkEnd():  # check if game ended I win
+            return False
+
+        return True
+
+
+    def checkCondition(self, vc):
+        target = self.field[vc[0]]
+        for i in vc:
+            if self.field[i] != target:
+                return None
+        return target
+
+
+    def checkEnd(self):
+        if self.turn < 5:
+            return False
+        for i in self.vcs:
+            if self.checkCondition(i):
+                self.wins(self.field[i[0]])
+                return True
+        return False
+
+
+    def checkOpportunity(self, tagret):
+        for i in self.vcs:
+            if self.countVc(i, tagret) == 2:
+                for target_idx in i:
+                    if self.field[target_idx] == "N":
+                        return target_idx
+        return None
+
+
+    def countVc(self, vc, target):
+        counter = 0
+        for i in vc:
+            if self.field[i] == target:
+                counter = counter + 1
+        return counter
+
+
+    def getStragityMove(self):
+        return None
+
+
+    def tagField(self, target_field, player):  #todo change turn
+        print(player + " setzt " + str(target_field))
+        if self.field[target_field] != "N":
+            return False
+        self.field[target_field] = player
+        self.turn = self.turn + 1  # danach (vielleich nocht wichtig)
+        self.print()
+
+        return True
+
+
+    def wins(self, player):
+        self.winner = player
+        self.game_on = False
+        print(player + " has won the game")
+        print("End Table:")
+        self.print()
+
+
+    def print(self):
+        print(self.field[0] + "  " + self.field[1] + "  " + self.field[2])
+        print(self.field[3] + "  " + self.field[4] + "  " + self.field[5])
+        print(self.field[6] + "  " + self.field[7] + "  " + self.field[8])
+
+
+    def getWinner(self):
+        return self.winner
+
+
+    def getNeutral(self):
+        res = []
+        for i in range(9):
+            print(i)
+            if self.field[i] == "N":
+                res.append(i)
+        return res
+
+
+def main():
+    game = GameHandler(kfirst="M")
+    game.print()
+    bc = True
+    if game.turn == 0 and game.first == "M":
+        bc = game.getMove(None)
+    while bc:
+        value = input("Setz Spielzug nummber: " + str(game.turn))
+        print(value)
+        bc = game.getMove(int(value))
+        print(bc)
+        game.getNeutral()
+
+
+if __name__ == '__main__':
+    # server()
+    main()
