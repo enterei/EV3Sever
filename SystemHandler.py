@@ -42,7 +42,7 @@ class SystemHandler:
         message=json.loads(message.decode('utf-8'))
         if(message.get('ID')=="System"):
             self.handleSystem(message)
-        if(message.get('ID')=="Test"):
+        if(message.get('Aktion')=="Test"):
             return self.testHandler.handleMessage(message)
 
     def handleSystem(self,message):
