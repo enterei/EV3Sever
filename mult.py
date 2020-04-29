@@ -136,6 +136,7 @@ while True:
             if res != None:
                 print(res)
                 message=message_handelr.handleMessage(res)
+                print(message)
             if message !=None:
                 print("m!=NOne")
                 send(key,mask,message)
