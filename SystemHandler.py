@@ -39,6 +39,7 @@ class SystemHandler:
         print("mudda")
 
     def handleMessage(self,message):
+        res =[{}]
         message=json.loads(message.decode('utf-8'))
         if(message.get('ID')=="System"):
             self.handleSystem(message)

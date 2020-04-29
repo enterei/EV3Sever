@@ -15,5 +15,5 @@ class TestHandler:
         message= self.default_message
         message['Bewegung':'straight']
         message['way':'s']
-
+        print(message)
         return message
