@@ -86,9 +86,11 @@ def rec(key,mask):
     if mask & selectors.EVENT_READ:
         print("in read")
         recv_data = sock.recv(1024)  # Should be ready to read
+
         print(recv_data)
         if recv_data:
             # data.outb += recv_data
+            print("ga")
             print(recv_data)
             return recv_data
         else:
@@ -123,10 +125,13 @@ while True:
         if key.data is None:
             accept_wrapper(key.fileobj)
         else:
+
             #m= TTT.doSomething(service_connection(key, mask))
             res=rec(key,mask)
             print(res)
+
             message=message_handelr.handleMessage(res)
             if message !=None:
                 print("m!=NOne")
                 send(key,mask,message)
+
