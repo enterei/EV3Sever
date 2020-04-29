@@ -126,6 +126,6 @@ while True:
             res=rec(key,mask)
             print(res)
             message=message_handelr.handleMessage(res)
-       TTT.doSomething(res)     if message !=None:
+            if message !=None:
                 print("m!=NOne")
                 send(key,mask,message)
