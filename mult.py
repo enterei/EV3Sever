@@ -90,7 +90,7 @@ def rec(key,mask):
         print("in read")
         recv_data = sock.recv(1024)  # Should be ready to read
 
-        print(recv_data)
+       # print(recv_data)
         if recv_data:
             # data.outb += recv_data
             print("ga")
@@ -128,10 +128,10 @@ while True:
         if key.data is None:
             accept_wrapper(key.fileobj)
         else:
-
+            print("in loop")
             #m= TTT.doSomething(service_connectionTTT.doSomething(res)(key, mask))
             res=rec(key,mask)
-            print(res)
+           # print(res)TTT.doSomething(res)
             if res != None:
                 message=message_handelr.handleMessage(res)
             if message !=None:
