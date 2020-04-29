@@ -44,6 +44,7 @@ class SystemHandler:
         if(message.get('ID')=="System"):
             self.handleSystem(message)
         if(message.get('Aktion')=="Test"):
+            print("in test")
             return self.testHandler.handleMessage(message)
 
     def handleSystem(self,message):
