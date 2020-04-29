@@ -51,6 +51,7 @@ def service_connection(key, mask):
         if recv_data:
             #data.outb += recv_data
             print(recv_data)
+            print("here???")
         else:
             print('closing connection to', data.addr)
             sel.unregister(sock)
@@ -68,6 +69,7 @@ def send(key, mask,mes):
     sock = key.fileobj
     data = key.data
     data.out = message
+    print("send")
 
     if mask & selectors.EVENT_WRITE:
         if mes:
@@ -82,6 +84,7 @@ def rec(key,mask):
     sock = key.fileobj
     data = key.data
     data.out = message
+
     recv_data = None
     if mask & selectors.EVENT_READ:
         print("in read")
@@ -118,7 +121,7 @@ print('listening on', (host, port))
 lsock.setblocking(False)
 sel.register(lsock, selectors.EVENT_READ, data=None)
 TTT=TTT()
-
+message=None
 while True:
     events = sel.select(timeout=None)
     for key, mask in events:
@@ -126,11 +129,11 @@ while True:
             accept_wrapper(key.fileobj)
         else:
 
-            #m= TTT.doSomething(service_connection(key, mask))
+            #m= TTT.doSomething(service_connectionTTT.doSomething(res)(key, mask))
             res=rec(key,mask)
             print(res)
-
-            message=message_handelr.handleMessage(res)
+            if res != None:
+                message=message_handelr.handleMessage(res)
             if message !=None:
                 print("m!=NOne")
                 send(key,mask,message)
