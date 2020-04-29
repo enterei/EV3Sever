@@ -124,7 +124,8 @@ while True:
         else:
             #m= TTT.doSomething(service_connection(key, mask))
             res=rec(key,mask)
+            print(res)
             message=message_handelr.handleMessage(res)
-            if message !=None:
+       TTT.doSomething(res)     if message !=None:
                 print("m!=NOne")
                 send(key,mask,message)
