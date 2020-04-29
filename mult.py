@@ -86,6 +86,7 @@ def rec(key,mask):
     if mask & selectors.EVENT_READ:
         print("in read")
         recv_data = sock.recv(1024)  # Should be ready to read
+        print(recv_data)
         if recv_data:
             # data.outb += recv_data
             print(recv_data)
