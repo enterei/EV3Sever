@@ -6,7 +6,7 @@ import types
 from SystemHandler import SystemHandler
 from TTT import TTT
 parser = argparse.ArgumentParser(description="rosolve robo modes")
-parser.add_argument('rmode',type=str,help='rmode!')
+parser.add_argument('--rmode',type=str,help='rmode!',required=False)
 parser.add_argument('--cmode',type=int,default=1,help='cmode!',required=False)
 parser.add_argument('--speed',type=int,default=5,help='speed!',required=False)
 parser.add_argument('--time',type=int,default=10,help='time!',required=False)
