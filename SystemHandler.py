@@ -33,6 +33,7 @@ class SystemHandler:
         self.neutrals=self.game.getNeutral()
         self.neutral_idx=0
         self.setGoal(self.neutrals[self.neutral_idx])
+        #pr
 
     def checkField(self,idx):
         print("mudda")
