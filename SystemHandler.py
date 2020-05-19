@@ -56,6 +56,7 @@ class SystemHandler:
             print("in Befehl")
             if self.target[0]== None:
                 self.target =self.testHandler.getTestTarget()
+                return self.doMove(self.findWay())
             else:
                 return self.doMove(self.findWay())
 
@@ -81,6 +82,7 @@ class SystemHandler:
 
         self.dif=[self.target[0]-self.position[0],self.target[1]-self.position[1]] #difference
         if self.dif == [0,0]:
+            self.target=[None,None]
             return True
         if self.testMove(self.orientation):
             print("in s : "+ str(self.testMove(self.orientation)))
@@ -101,16 +103,16 @@ class SystemHandler:
         if m =="s":
             self.position[0]=self.position[0]+self.orientation[0]
             self.position[1] = self.position[1] + self.orientation[1]
-            message['mode']='way'
+          #  message['mode']='way'
             message['way']='s'
-            message['Aktion']='move'
+           # message['Aktion']='move'
             return message
         if m =="r":
             self.position[0] = self.position[0] + self.getRight()[0]
             self.position[1] = self.position[1] + self.getRight()[1]
             self.orientation = self.getRight()
-            message['way']='s'
-            message['Aktion']='move'
+            #message['way']='s'
+            #message['Aktion']='move'
 
             return message
 
@@ -119,7 +121,7 @@ class SystemHandler:
             self.position[1] = self.position[1] + self.getLeft()[1]
             self.orientation=self.getLeft()
             message['way']='s'
-            message['Aktion']='move'
+            #message['Aktion']='move'
 
             return message
 
@@ -220,6 +222,22 @@ class SystemHandler:
             return [3, 2]
         if (idx == 15):
             return [3, 3]
+
+    def findwholeway(self):
+        loop = False
+        way="s"
+        i = 1
+        while not loop:
+            x = self.findWay()
+            if x == True:
+                break
+            if x == None:
+                break
+            way[1]=(self.doMove(x).get('way'))
+            i=i+1
+        print("way would be:")
+        print(way)
+        return way
 
     def print(self):
         print(self.Table[0][0]+" "+self.Table[0][1]," "+self.Table[0][2]+ " "+self.Table[0][3])
