@@ -43,8 +43,9 @@ class SystemHandler:
     def handleMessage(self,message):
         res =[{}]
         print("in handle message")
-        print('message: '+ message)
         message=json.loads(message.decode('utf-8'))
+        print('message: '+ message)
+
         if(message.get('ID')=="System"):
             self.handleSystem(message)
         if(message.get('Aktion')=="Test"):
