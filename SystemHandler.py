@@ -238,7 +238,7 @@ class SystemHandler:
                 break
             if x == None:
                 break
-            way[1]=(self.doMove(x).get('way'))
+            way=way+(self.doMove(x).get('way'))
             i=i+1
         print("way would be:")
         print(way)
