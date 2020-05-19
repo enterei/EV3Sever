@@ -5,7 +5,7 @@ from TestHandler import TestHandler
 
 
 class SystemHandler:
-    game=GameHandler()#todo default message
+
 
     Table = [['N', 'N', 'N', 'N'], ['N', 'N', 'N', 'N'], ['N', 'N', 'N', 'N'], ['N', 'N', 'N', 'N']]
     next_corner=[None,None]
@@ -21,31 +21,41 @@ class SystemHandler:
         self.default_message=defaultM
         self.testHandler=TestHandler(defaultM)
         self.Table[0][0]= 'P'
-        self.target = [0, 0]
-        self.position = [3, 0]
+        self.target = [3, 0]
+        self.position = [0, 0]
         self.orientation=[1,0]
         self.next_corner = [None, None]
+        self.game = GameHandler(defaultM)  # todo default message
 
 
 
     def getEnemyMove(self):
-        self.active="getEnemeyMove"
-        self.neutrals=self.game.getNeutral()
-        self.neutral_idx=0
-        self.setGoal(self.neutrals[self.neutral_idx])
-
+        #self.active="getEnemeyMove"
+        #self.neutrals=self.game.getNeutral()
+        #self.neutral_idx=0
+        #self.setGoal(self.neutrals[self.neutral_idx])
+        b = input('Choose a number: ')
+        return b
 
     def checkField(self,idx):
         print("mudda")
 
     def handleMessage(self,message):
         res =[{}]
+        print("in handle message")
+        print('message: '+ message)
         message=json.loads(message.decode('utf-8'))
         if(message.get('ID')=="System"):
             self.handleSystem(message)
         if(message.get('Aktion')=="Test"):
             print("in test")
             return self.testHandler.handleMessage(message)
+        if (message.get('Aktion') == "Befehl"):
+            print("in Befehl")
+            if self.target[0]== None:
+                self.target =self.testHandler.getTestTarget()
+            else:
+                return self.doMove(self.findWay())
 
     def handleSystem(self,message):
         print("System message")
@@ -85,20 +95,32 @@ class SystemHandler:
         return None
 
     def doMove(self,m):
+        message=self.default_message
         if m =="s":
             self.position[0]=self.position[0]+self.orientation[0]
             self.position[1] = self.position[1] + self.orientation[1]
-            print("s")
+            message['mode']='way'
+            message['way']='s'
+            message['Aktion']='move'
+            return message
         if m =="r":
             self.position[0] = self.position[0] + self.getRight()[0]
             self.position[1] = self.position[1] + self.getRight()[1]
             self.orientation = self.getRight()
-            print("r")
+            message['way']='s'
+            message['Aktion']='move'
+
+            return message
+
         if m =="l":
             self.position[0] = self.position[0] + self.getLeft()[0]
             self.position[1] = self.position[1] + self.getLeft()[1]
             self.orientation=self.getLeft()
-            print("l")
+            message['way']='s'
+            message['Aktion']='move'
+
+            return message
+
 
 
 

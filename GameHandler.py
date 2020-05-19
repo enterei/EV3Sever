@@ -28,7 +28,8 @@ class GameHandler:
     enemy_oppertunitiy = []
 
 
-    def __init__(self, kfirst="M", **kwargs):
+    def __init__(self, dM,kfirst="M", **kwargs):
+        self.defaultMessage=dM
         self.first = kfirst
         self.vcs = [v0, v1, v2, v3, v4, v5, v6, v7]
         self.my_oppertunitiy = []

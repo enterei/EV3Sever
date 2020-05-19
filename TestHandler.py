@@ -18,3 +18,12 @@ class TestHandler:
         message.update(self.move_message)
         print(message)
         return message
+
+    def getTestTarget(self):
+        value = input("ecke x: ")
+        print(value)
+        target=[]
+        target[0]=value
+        value = input("ecke y: ")
+        target[1] = value
+        return target
