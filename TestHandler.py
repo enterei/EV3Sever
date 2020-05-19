@@ -23,7 +23,7 @@ class TestHandler:
         value = input("ecke x: ")
         print(value)
         target=[]
-        target.append(value)
+        target.append(int(value))
         value = input("ecke y: ")
-        target.append(value)
+        target.append(int(value))
         return target

@@ -230,7 +230,7 @@ class SystemHandler:
 
     def findwholeway(self):
         loop = False
-        way="s"
+        way=""
         i = 1
         while not loop:
             x = self.findWay()
