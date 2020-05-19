@@ -80,12 +80,11 @@ class SystemHandler:
             if self.target:
                 order=self.findWay()
     def findWay(self):
-        print("pos: ")
-        print(self.position)
-        print("or: ")
-        print(self.orientation)
+
 
         self.dif=[self.target[0]-self.position[0],self.target[1]-self.position[1]] #difference
+        print("dif: ")
+        print(self.dif)
         if self.dif == [0,0]:
             self.target=[None,None]
             return True
@@ -93,8 +92,12 @@ class SystemHandler:
             print("in s : "+ str(self.testMove(self.orientation)))
             return "s" ##straight
         if self.testMove(self.getRight()):
+            #print("in r : "+ str(self.testMove(self.orientation)))
+
             return "r"
         if self.testMove(self.getLeft()):
+            #print("in l : "+ str(self.testMove(self.orientation)))
+
             return "l"
         if self.valid(self.getLeft()):
             return "l"
@@ -104,31 +107,31 @@ class SystemHandler:
         return None
 
     def doMove(self,m):
-        message=self.default_message
         if m =="s":
             self.position[0]=self.position[0]+self.orientation[0]
             self.position[1] = self.position[1] + self.orientation[1]
           #  message['mode']='way'
-            message['way']='s'
+         #   message['way']='s'
            # message['Aktion']='move'
-            return message
+            return 's'
         if m =="r":
+
             self.position[0] = self.position[0] + self.getRight()[0]
             self.position[1] = self.position[1] + self.getRight()[1]
             self.orientation = self.getRight()
-            message['way']='r'
+          #  message['way']='r'
             #message['Aktion']='move'
 
-            return message
+            return 'r'
 
         if m =="l":
             self.position[0] = self.position[0] + self.getLeft()[0]
             self.position[1] = self.position[1] + self.getLeft()[1]
             self.orientation=self.getLeft()
-            message['way']='l'
+            #message['way']='l'
             #message['Aktion']='move'
 
-            return message
+            return 'l'
 
 
 
@@ -173,24 +176,24 @@ class SystemHandler:
 
     def getRight(self):
         if self.orientation[0] == 1:
-            return [0,-1]
-        if self.orientation[0] ==-1:
             return [0,1]
+        if self.orientation[0] ==-1:
+            return [0,-1]
         if self.orientation[1] == 1:
-            return [1,0]
-        if self.orientation[1] ==-1:
             return [-1,0]
+        if self.orientation[1] ==-1:
+            return [1,0]
         print("ERROR")
         return None
     def getLeft(self):
         if self.orientation[0] == 1:
-            return [0,1]
-        if self.orientation[0] ==-1:
             return [0,-1]
+        if self.orientation[0] ==-1:
+            return [0,1]
         if self.orientation[1] == 1:
-            return [-1,0]
-        if self.orientation[1] ==-1:
             return [1,0]
+        if self.orientation[1] ==-1:
+            return [-1,0]
         print("ERROR")
         return None
 
@@ -229,6 +232,11 @@ class SystemHandler:
             return [3, 3]
 
     def findwholeway(self):
+        print("pos: ")
+        print(self.position)
+        print("or: ")
+        print(self.orientation)
+        print(self.target)
         loop = False
         way=""
         i = 1
@@ -238,7 +246,7 @@ class SystemHandler:
                 break
             if x == None:
                 break
-            way=way+(self.doMove(x).get('way'))
+            way=way+self.doMove(x)
             i=i+1
         print("way would be:")
         print(way)
