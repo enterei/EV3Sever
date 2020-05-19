@@ -116,7 +116,7 @@ class SystemHandler:
             self.position[0] = self.position[0] + self.getRight()[0]
             self.position[1] = self.position[1] + self.getRight()[1]
             self.orientation = self.getRight()
-            #message['way']='s'
+            message['way']='r'
             #message['Aktion']='move'
 
             return message
@@ -125,7 +125,7 @@ class SystemHandler:
             self.position[0] = self.position[0] + self.getLeft()[0]
             self.position[1] = self.position[1] + self.getLeft()[1]
             self.orientation=self.getLeft()
-            message['way']='s'
+            message['way']='l'
             #message['Aktion']='move'
 
             return message
