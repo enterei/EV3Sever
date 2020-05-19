@@ -56,7 +56,7 @@ class SystemHandler:
             print("in Befehl")
             if self.target[0]== None:
                 self.target =self.testHandler.getTestTarget()
-                way =self.findwholeway()
+            way =self.findwholeway()
               #  return self.doMove(self.findWay())
             message=self.default_message
             message['Aktion']="move"
