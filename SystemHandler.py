@@ -56,9 +56,14 @@ class SystemHandler:
             print("in Befehl")
             if self.target[0]== None:
                 self.target =self.testHandler.getTestTarget()
-                return self.doMove(self.findWay())
-            else:
-                return self.doMove(self.findWay())
+                way =self.findwholeway()
+              #  return self.doMove(self.findWay())
+            message=self.default_message
+            message['Aktion']="move"
+            message['way']=way
+            print("return:")
+            print(message)
+            return message
 
     def handleSystem(self,message):
         print("System message")
