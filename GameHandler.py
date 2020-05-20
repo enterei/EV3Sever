@@ -80,7 +80,7 @@ class GameHandler:
         if self.checkEnd():  # check if game ended I win
             return False
 
-        return True
+        return zug
 
 
     def checkCondition(self, vc):
