@@ -22,7 +22,7 @@ parser.add_argument('--kd',type=float,default=0.3,help='kd!',required=False)
 parser.add_argument('--tlr',type=float,default=62,help='tlr!',required=False)
 parser.add_argument('--wsp',type=int,default=76,help='wsp!',required=False)
 
-#### turn
+#### turnsock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 parser.add_argument('--lspeed',type=int,default=20,help='rsped!',required=False)
 parser.add_argument('--rspeed',type=int,default=-5,help='lspeed!',required=False)
 parser.add_argument('--turn',type=bool,default=False,help='turn!',required=False)

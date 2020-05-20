@@ -56,7 +56,7 @@ class SystemHandler:
             if self.game.game_on:
                 self.game.print()
                 value = input("wählen sie ihr Feld: ")
-                move= self.game.getMove(value)
+                move= self.game.getMove(int(value))
                 self.target = self.lookUp(move)
                 way = self.findwholeway()
                 #  return self.doMove(self.findWay())
