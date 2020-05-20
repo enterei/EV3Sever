@@ -227,6 +227,7 @@ class SystemHandler:
         return None
 
     def lookUp(self,idx):
+        print("in look up: "+str(idx))
         if(idx == 0):
             print("3 0")
             return [3,0]
