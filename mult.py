@@ -26,7 +26,7 @@ parser.add_argument('--wsp',type=int,default=76,help='wsp!',required=False)
 parser.add_argument('--lspeed',type=int,default=20,help='rsped!',required=False)
 parser.add_argument('--rspeed',type=int,default=-5,help='lspeed!',required=False)
 parser.add_argument('--turn',type=bool,default=False,help='turn!',required=False)
-parser.add_argument('--degrees',type=int,default=200,help='deg!',required=False)
+parser.add_argument('--degrees',type=int,default=150,help='deg!',required=False)
 parser.add_argument('--rot',type=float,default=3,help='rot!',required=False)
 parser.add_argument('--edgetest',type=bool,default=False,help='edgetest!',required=False)
 
