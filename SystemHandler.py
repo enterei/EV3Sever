@@ -220,17 +220,17 @@ class SystemHandler:
         if (idx == 2):
             return [0, 2]
         if (idx == 3):
-            return [0, 3]
-        if (idx == 4):
             return [1, 0]
-        if (idx == 5):
+        if (idx == 4):
             return [1, 1]
-        if (idx == 6):
+        if (idx == 5):
             return [1, 2]
+        if (idx == 6):
+            return [2, 0]
         if (idx == 7):
-            return [1, 3]
+            return [2, 1]
         if (idx == 8):
-            return [2,0]
+            return [2,2]
         if (idx == 9):
             return [2, 1]
         if (idx == 10):
