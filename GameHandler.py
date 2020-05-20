@@ -97,6 +97,7 @@ class GameHandler:
         for i in self.vcs:
             if self.checkCondition(i):
                 self.wins(self.field[i[0]])
+                self.game_on=False
                 return True
         return False
 

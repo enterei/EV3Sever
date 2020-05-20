@@ -53,6 +53,21 @@ class SystemHandler:
             print("in test")
             return self.testHandler.handleMessage(message)
         if (message.get('Aktion') == "Befehl"):
+            if self.game.game_on:
+                self.game.print()
+                value = input("wählen sie ihr Feld: ")
+                move= self.game.getMove(value)
+                self.target = self.lookUp(move)
+                way = self.findwholeway()
+                #  return self.doMove(self.findWay())
+                message = self.default_message
+                message['Aktion'] = "move"
+                message['way'] = way
+                print("return:")
+                print(message)
+                return message
+
+                print(value)
             print("in Befehl")
             if self.target[0]== None:
                 self.target =self.testHandler.getTestTarget()
@@ -64,7 +79,7 @@ class SystemHandler:
             print("return:")
             print(message)
             return message
-
+      #  if message.get('Aktion') == "Befehl":
     def handleSystem(self,message):
         print("System message")
 

@@ -13,7 +13,7 @@ parser.add_argument('--speed',type=int,default=10,help='speed!',required=False)
 parser.add_argument('--time',type=int,default=10,help='time!',required=False)
 parser.add_argument('--ms',type=int,default=4500,help='ms!',required=False)
 parser.add_argument('--edgemax',type=int,default=1,help='edgemax!',required=False)
-parser.add_argument('--edgev',type=int,default=53,help='tagarget_light_intensity!',required=False)
+parser.add_argument('--edgev',type=int,default=54,help='tagarget_light_intensity!',required=False)
 parser.add_argument('--bscan',type=bool,default=False,help='bscan!',required=False)
 #follow
 parser.add_argument('--kp',type=float,default=2,help='kp!',required=False)
