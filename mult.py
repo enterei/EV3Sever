@@ -26,8 +26,8 @@ parser.add_argument('--wsp',type=int,default=76,help='wsp!',required=False)
 parser.add_argument('--lspeed',type=int,default=20,help='rsped!',required=False)
 parser.add_argument('--rspeed',type=int,default=-5,help='lspeed!',required=False)
 parser.add_argument('--turn',type=bool,default=False,help='turn!',required=False)
-parser.add_argument('--degrees',type=int,default=250,help='deg!',required=False)
-parser.add_argument('--rot',type=float,default=1,help='rot!',required=False)
+parser.add_argument('--degrees',type=int,default=200,help='deg!',required=False)
+parser.add_argument('--rot',type=float,default=3,help='rot!',required=False)
 parser.add_argument('--edgetest',type=bool,default=False,help='edgetest!',required=False)
 
 
@@ -117,11 +117,13 @@ defaultM={'speed':pargs.speed,'time':pargs.time,'ms':pargs.ms,
 
                           }
 # ...
+
 message_handelr=SystemHandler(defaultM)
 host = '192.168.0.179'  # The server's hostname or IP address
 port = 65432
 lsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 lsock.bind((host, port))
+lsock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 lsock.listen()
 print('listening on', (host, port))
 lsock.setblocking(False)
