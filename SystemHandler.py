@@ -21,11 +21,11 @@ class SystemHandler:
         self.default_message=defaultM
         self.testHandler=TestHandler(defaultM)
         self.Table[0][0]= 'P'
-        self.target = [3, 2]
-        self.position = [0,0]
+        self.position = [3,0]
         self.orientation=[1,0]
         self.next_corner = [None, None]
         self.game = GameHandler(defaultM)  # todo default message
+        self.target=[None,None]
 
 
 
