@@ -244,7 +244,7 @@ class SystemHandler:
 
             return [2, 0]
         if (idx == 4):
-            print("3 0")
+            print("2 1")
 
             return [2, 1]
         if (idx == 5):

@@ -2,5 +2,5 @@ from SystemHandler import SystemHandler
 sh=SystemHandler("buh")
 
 loop = False
-sh.findwholeway()
-
+#sh.findwholeway()
+print(sh.lookUp(4))
