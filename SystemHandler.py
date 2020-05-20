@@ -21,7 +21,7 @@ class SystemHandler:
         self.default_message=defaultM
         self.testHandler=TestHandler(defaultM)
         self.Table[0][0]= 'P'
-        self.position = [3,0]
+        self.position = [0,0]
         self.orientation=[1,0]
         self.next_corner = [None, None]
         self.game = GameHandler(defaultM)  # todo default message
@@ -57,6 +57,8 @@ class SystemHandler:
                 self.game.print()
                 value = input("wählen sie ihr Feld: ")
                 move= self.game.getMove(int(value))
+                print("davor targetting:")
+                print(self.target)
                 self.target = self.lookUp(move)
                 print("targetting:")
                 print(self.target)
@@ -226,22 +228,39 @@ class SystemHandler:
 
     def lookUp(self,idx):
         if(idx == 0):
+            print("3 0")
             return [3,0]
         if (idx == 1):
+            print("3 1")
+
             return [3, 1]
         if (idx == 2):
+            print("3 2")
+
             return [3, 2]
         if (idx == 3):
+            print("2 0")
+
             return [2, 0]
         if (idx == 4):
+            print("3 0")
+
             return [2, 1]
         if (idx == 5):
+            print("2 1")
+
             return [2, 2]
         if (idx == 6):
+            print("2 2")
+
             return [1, 0]
         if (idx == 7):
+            print("1 1")
+
             return [1, 1]
         if (idx == 8):
+            print("1 2")
+
             return [1,2]
         if (idx == 9):
             return [1, 2]
