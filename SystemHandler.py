@@ -9,7 +9,7 @@ class SystemHandler:
 
     Table = [['N', 'N', 'N', 'N'], ['N', 'N', 'N', 'N'], ['N', 'N', 'N', 'N'], ['N', 'N', 'N', 'N']]
     next_corner=[None,None]
-    orientation =[1,0]
+    orientation =[-1,0]
     neutrals =[]
     neutral_idx=0
     active =None
@@ -22,7 +22,7 @@ class SystemHandler:
         self.testHandler=TestHandler(defaultM)
         self.Table[0][0]= 'P'
         self.target = [3, 2]
-        self.position = [3, 0]
+        self.position = [0,0]
         self.orientation=[1,0]
         self.next_corner = [None, None]
         self.game = GameHandler(defaultM)  # todo default message
@@ -58,6 +58,8 @@ class SystemHandler:
                 value = input("wählen sie ihr Feld: ")
                 move= self.game.getMove(int(value))
                 self.target = self.lookUp(move)
+                print("targetting:")
+                print(self.target)
                 way = self.findwholeway()
                 #  return self.doMove(self.findWay())
                 message = self.default_message
@@ -95,6 +97,11 @@ class SystemHandler:
             if self.target:
                 order=self.findWay()
     def findWay(self):
+        print("pos: ")
+        print(self.position)
+        print("or: ")
+        print(self.orientation)
+        print(self.target)
 
 
         self.dif=[self.target[0]-self.position[0],self.target[1]-self.position[1]] #difference
@@ -123,6 +130,7 @@ class SystemHandler:
 
     def doMove(self,m):
         if m =="s":
+            print("in s")
             self.position[0]=self.position[0]+self.orientation[0]
             self.position[1] = self.position[1] + self.orientation[1]
           #  message['mode']='way'
@@ -130,6 +138,7 @@ class SystemHandler:
            # message['Aktion']='move'
             return 's'
         if m =="r":
+            print("in r")
 
             self.position[0] = self.position[0] + self.getRight()[0]
             self.position[1] = self.position[1] + self.getRight()[1]
@@ -140,6 +149,8 @@ class SystemHandler:
             return 'r'
 
         if m =="l":
+            print("in l")
+
             self.position[0] = self.position[0] + self.getLeft()[0]
             self.position[1] = self.position[1] + self.getLeft()[1]
             self.orientation=self.getLeft()
@@ -181,6 +192,8 @@ class SystemHandler:
             return False
 
     def valid(self,move):
+        print(self.position[0]+move[0])
+        print(self.position[1]+move[1])
         if self.position[0]+move[0]>3  or self.position[0]+move[0]<0 or self.position[1]+move[1]>3  or self.position[1]+move[1]<0:
             print("nOT FUCKING VALID: "+ str(move[0])+ " "+ str(move[1]))
             return None
@@ -214,25 +227,25 @@ class SystemHandler:
 
     def lookUp(self,idx):
         if(idx == 0):
-            return [0,0]
+            return [3,0]
         if (idx == 1):
-            return [0, 1]
+            return [3, 1]
         if (idx == 2):
-            return [0, 2]
+            return [3, 2]
         if (idx == 3):
-            return [1, 0]
-        if (idx == 4):
-            return [1, 1]
-        if (idx == 5):
-            return [1, 2]
-        if (idx == 6):
             return [2, 0]
+        if (idx == 4):
+            return [2, 1]
+        if (idx == 5):
+            return [2, 2]
+        if (idx == 6):
+            return [1, 0]
         if (idx == 7):
-            return [2, 1]
+            return [1, 1]
         if (idx == 8):
-            return [2,2]
+            return [1,2]
         if (idx == 9):
-            return [2, 1]
+            return [1, 2]
         if (idx == 10):
             return [2, 2]
         if (idx == 11):
