@@ -86,6 +86,8 @@ class GameHandler:
 
     def checkCondition(self, vc):
         target = self.field[vc[0]]
+        if target =="N":
+            return
         for i in vc:
             if self.field[i] != target:
                 return None
@@ -94,12 +96,18 @@ class GameHandler:
 
     def checkEnd(self):
         if self.turn < 5:
+            print("checkENd False")
+
             return False
         for i in self.vcs:
             if self.checkCondition(i):
                 self.wins(self.field[i[0]])
                 self.game_on=False
+                print("checkENd True")
+
                 return True
+        print("checkENd False")
+
         return False
 
 
@@ -163,7 +171,9 @@ class GameHandler:
 
 
 def main():
-    game = GameHandler(kfirst="M")
+    dm="ga"
+
+    game = GameHandler(kfirst="E4",dM="ga")
     game.print()
     bc = True
     if game.turn == 0 and game.first == "M":
@@ -173,7 +183,7 @@ def main():
         print(value)
         bc = game.getMove(int(value))
         print(bc)
-        game.getNeutral()
+     #   game.getNeutral()
 
 
 if __name__ == '__main__':
