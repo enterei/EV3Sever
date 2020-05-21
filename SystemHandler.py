@@ -21,11 +21,11 @@ class SystemHandler:
         self.default_message=defaultM
         self.testHandler=TestHandler(defaultM)
         self.Table[0][0]= 'P'
-        self.position = [0,0]
-        self.orientation=[1,0]
+        self.position = [2,2]
+        self.orientation=[-1,0]
         self.next_corner = [None, None]
         self.game = GameHandler(defaultM)  # todo default message
-        self.target=[None,None]
+        self.target=[1,2]
 
 
 
@@ -109,7 +109,7 @@ class SystemHandler:
         print("dif: ")
         print(self.dif)
         if self.dif == [0,0]:
-            self.target=[None,None]
+            #self.target=[None,None]
             return True
         if self.testMove(self.orientation):
             print("in s : "+ str(self.testMove(self.orientation)))
