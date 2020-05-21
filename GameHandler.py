@@ -77,7 +77,7 @@ class GameHandler:
         if not self.tagField(zug, "M"):  # myMove
             print("Wrong move by M")
             self.wins("E")
-            return False
+            return zug
         if self.checkEnd():  # check if game ended I win
             return False
 
