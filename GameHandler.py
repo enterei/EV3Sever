@@ -45,14 +45,15 @@ class GameHandler:
 
 
     def thinkMove(self, new_markedf_field_number):  # new
+        if my_option != None:
+            print("my option: " + str(my_option))
+            return my_option
         enemy_option = self.checkOpportunity("E")
         if enemy_option != None:
             print("enemy option: " + str(enemy_option))
             return enemy_option
         my_option = self.checkOpportunity("M")
-        if my_option != None:
-            print("my option: " + str(my_option))
-            return my_option
+
         # if self.stragity != None:
         #   return self.getStragityMove() todo
         try_number = randrange(0, 8, 1)
