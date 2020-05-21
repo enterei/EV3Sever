@@ -52,6 +52,9 @@ class SystemHandler:
             print("in test")
             return self.testHandler.handleMessage(message)
         if (message.get('Aktion') == "Befehl"):
+            if not self.game.game_on:
+                self.game = GameHandler()
+
             if self.game.game_on:
                 self.game.print()
                 value = input("wählen sie ihr Feld: ")
