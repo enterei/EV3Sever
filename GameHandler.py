@@ -45,6 +45,7 @@ class GameHandler:
 
 
     def thinkMove(self, new_markedf_field_number):  # new
+        my_option = self.checkOpportunity("M")
         if my_option != None:
             print("my option: " + str(my_option))
             return my_option
@@ -52,7 +53,6 @@ class GameHandler:
         if enemy_option != None:
             print("enemy option: " + str(enemy_option))
             return enemy_option
-        my_option = self.checkOpportunity("M")
 
         # if self.stragity != None:
         #   return self.getStragityMove() todo
