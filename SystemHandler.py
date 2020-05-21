@@ -9,7 +9,7 @@ class SystemHandler:
 
     Table = [['N', 'N', 'N', 'N'], ['N', 'N', 'N', 'N'], ['N', 'N', 'N', 'N'], ['N', 'N', 'N', 'N']]
     next_corner=[None,None]
-    orientation =[-1,0]
+    orientation =[1,0]
     neutrals =[]
     neutral_idx=0
     active =None
@@ -21,7 +21,7 @@ class SystemHandler:
         self.default_message=defaultM
         self.testHandler=TestHandler(defaultM)
         self.Table[0][0]= 'P'
-        self.position = [2,2]
+        self.position = [0,0]
         self.orientation=[-1,0]
         self.next_corner = [None, None]
         self.game = GameHandler(defaultM)  # todo default message
