@@ -53,7 +53,7 @@ class SystemHandler:
             return self.testHandler.handleMessage(message)
         if (message.get('Aktion') == "Befehl"):
             if not self.game.game_on:
-                self.game = GameHandler()
+                self.game = GameHandler(self.default_message)
 
             if self.game.game_on:
                 self.game.print()
@@ -61,6 +61,8 @@ class SystemHandler:
                 move= self.game.getMove(int(value))
                 print("davor targetting:")
                 print(self.target)
+                print("davor move:")
+                print(move)
                 self.target = self.lookUp(move)
                 print("targetting:")
                 print(self.target)

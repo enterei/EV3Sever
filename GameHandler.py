@@ -79,7 +79,7 @@ class GameHandler:
             self.wins("E")
             return zug
         if self.checkEnd():  # check if game ended I win
-            return False
+            return zug
 
         return zug
 
