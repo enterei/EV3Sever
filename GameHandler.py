@@ -106,6 +106,10 @@ class GameHandler:
                 print("checkENd True")
 
                 return True
+        if self.turn==9:
+            self.wins(None)
+
+            return True
         print("checkENd False")
 
         return False
