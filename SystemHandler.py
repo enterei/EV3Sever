@@ -89,6 +89,7 @@ class SystemHandler:
                         self.aktion == "sendprep"
                         self.nextaktion == "sendprep"
                         return message
+            print("no active scan errorrr")
         if (message.get('Aktion') == "waitOver"):
             if message.get('Found')==True:
                 #zug machen und schicken
