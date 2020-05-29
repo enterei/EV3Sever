@@ -1,25 +1,5 @@
 class LookUpTable:
-    def lookUpTable(self,idx):
-        if idx[0]==2 and idx[1]==0:
-            return 0
-        if idx[0]==2 and idx[1]==1:
-            return 1
-        if idx[0] ==2 and idx[1] == 1:
-            return 1
-        if idx[0]==2 and idx[1]==2:
-            return 2
-        if idx[0]==1 and idx[1]==0:
-            return 3
-        if idx[0]==1 and idx[1]==1:
-            return 4
-        if idx[0]==1 and idx[1]==2:
-            return 5
-        if idx[0]==0 and idx[1]==0:
-            return 6
-        if idx[0]==0 and idx[1]==1:
-            return 7
-        if idx[0]==0 and idx[1]==2:
-            return 8
+
     def lookUpField(self, idx):
         if (idx == 0):
             return [2, 0]
@@ -39,3 +19,25 @@ class LookUpTable:
             return [0, 1]
         if (idx == 8):
             return [0, 2]
+
+    def lookUpTable(self, idx):
+        if idx[0] == 2 and idx[1] == 0:
+            return 0
+        if idx[0] == 2 and idx[1] == 1:
+            return 1
+        if idx[0] == 2 and idx[1] == 1:
+            return 1
+        if idx[0] == 2 and idx[1] == 2:
+            return 2
+        if idx[0] == 1 and idx[1] == 0:
+            return 3
+        if idx[0] == 1 and idx[1] == 1:
+            return 4
+        if idx[0] == 1 and idx[1] == 2:
+            return 5
+        if idx[0] == 0 and idx[1] == 0:
+            return 6
+        if idx[0] == 0 and idx[1] == 1:
+            return 7
+        if idx[0] == 0 and idx[1] == 2:
+            return 8
