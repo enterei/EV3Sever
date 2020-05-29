@@ -348,7 +348,7 @@ class SystemHandler:
         self.target=neutrals[self.scanidx]
         way=self.findwholeway()
         message = self.default_message
-        message['Aktion'] = "move"
+        message['Aktion'] = "scan"
         message['way'] = way
         print("return:")
         self.scanidx=self.scanidx+1
