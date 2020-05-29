@@ -86,7 +86,8 @@ class SystemHandler:
             print("return:")
             print(message)
             return message
-      #  if message.get('Aktion') == "Befehl":
+        if message.get('Aktion') == "endwait":
+            print("endwait on server")
     def handleSystem(self,message):
         print("System message")
 
