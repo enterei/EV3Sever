@@ -353,7 +353,7 @@ class SystemHandler:
            self.neutrals= self.game.getNeutral()
            self.scanidx=0
            self.aktivescan=True
-        self.target=self.neutrals[self.scanidx]
+        self.target=lookUpTable.lookUpField(self.neutrals[self.scanidx])
         way=self.findwholeway()
         message = self.default_message
         message['Aktion'] = "scan"
