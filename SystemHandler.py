@@ -85,7 +85,7 @@ class SystemHandler:
                     self.aktion = "waitUser"
                     self.nextaktion = "findUserInput"
 
-            if self.nextaktion=="waitUser":
+            if self.aktion=="waitUser":
                 return self.sendwait()
 
 
