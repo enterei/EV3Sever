@@ -168,7 +168,7 @@ class GameHandler:
     def getNeutral(self):
         res = []
         for i in range(9):
-            print(i)
+           # print(i)
             if self.field[i] == "N":
                 res.append(i)
         return res
@@ -187,7 +187,7 @@ def main():
         print(value)
         bc = game.getMove(int(value))
         print(bc)
-     #   game.getNeutral()
+        print(game.getNeutral())
 
 
 if __name__ == '__main__':

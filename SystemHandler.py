@@ -13,6 +13,8 @@ class SystemHandler:
     neutral_idx=0
     active =None
     dif=None
+    aktion=None
+    nextaktion=None
 
 
 
@@ -25,6 +27,13 @@ class SystemHandler:
         self.next_corner = [None, None]
         self.game = GameHandler(defaultM)  # todo default message
         self.target=[3,0]
+        self.aktivescan=False
+        self.scanidx = 0
+
+        if self.game.first =="E":
+            self.aktion="waitUser"
+            self.nextaktion="findUserInput"
+
 
 
 
@@ -51,9 +60,54 @@ class SystemHandler:
         if(message.get('Aktion')=="Test"):
             print("in test")
             return self.testHandler.handleMessage(message)
+        if (message.get('Aktion') == "waitOver"):
+            if message.get('Found')==True:
+                #zug machen und schicken
+                print("zug machen und schicken")
+            if self.nextaktion=="findUserInput":#wenn nicht weitersuchen
+                return self.handleScan()
+
         if (message.get('Aktion') == "Befehl"):
+
+
+
+
             if not self.game.game_on:
                 self.game = GameHandler(self.default_message)
+                if self.game.first == "E":
+                    self.aktion = "wait"
+                    self.nextaktion = "wait"
+
+
+            if self.nextaktion=="goprep":
+                return self.sendprep()
+            if self.nextaktion=="scan":
+                if self.aktivescan:
+                    if message.get('found'):
+                        print(self.scanidx-1)
+                        x=input("yours?")
+                        if x=="":
+                            move = self.game.getMove(int(self.scanidx-1))
+                            print("davor targetting:")
+                            print(self.target)
+                            print("davor move:")
+                            print(move)
+                            self.target = self.lookUp(move)
+                            print("targetting:")
+                            print(self.target)
+                            way = self.findwholeway()
+                            #  return self.doMove(self.findWay())
+                            message = self.default_message
+                            message['Aktion'] = "move"
+                            message['way'] = way
+                            print("return:")
+                            print(message)
+                            self.scanidx=0
+                            self.aktivescan=False
+                            return message
+
+
+                return self.handleScan()
 
             if self.game.game_on:
                 self.game.print()
@@ -311,5 +365,24 @@ class SystemHandler:
         print(self.Table[2][0]+" "+self.Table[2][1]," "+self.Table[2][2]+ " "+self.Table[2][3])
         print(self.Table[3][0]+" "+self.Table[3][1]," "+self.Table[3][2]+ " "+self.Table[3][3])
 
+    def sendwait(self):
+        message = self.default_message
+        message['Aktion'] = 'wait'
+    def sendprep(self):
+        self.target==[0,0]
+        way=self.findwholeway()
+    def handleScan(self):
+        if not self.aktivescan:
+           neutrals= self.game.getNeutral()
+           self.scanidx=0
+           self.aktivescan=True
+        self.target=neutrals[self.scanidx]
+        way=self.findwholeway()
+        message = self.default_message
+        message['Aktion'] = "move"
+        message['way'] = way
+        print("return:")
+        self.scanidx=self.scanidx+1
+        return message
 
 
