@@ -10,6 +10,7 @@ class TestHandler:
         if message.get('Case')=="case1":
            res = self.straight()
         if message.get('Case')=="case2":
+            print("in case2")
             res=self.sendwait()
         return res
 
@@ -32,6 +33,7 @@ class TestHandler:
     def sendwait(self):
         message= self.default_message
         message['Aktion']='wait'
+        return message
 
 
 
