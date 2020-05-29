@@ -76,7 +76,8 @@ class SystemHandler:
         if (message.get('Aktion') == "Befehl"):
 
 
-
+            print(self.aktion)
+            print(self.nextaktion)
 
             if not self.game.game_on:
                 self.game = GameHandler(self.default_message)
