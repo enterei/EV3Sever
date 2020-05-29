@@ -72,7 +72,7 @@ class SystemHandler:
                 self.aktivescan = True
                 self.aktion="scan"
                 self.nextaktion="makemove"
-                return self.handleScanjson.dumps(messages).encode('utf-8')()
+                return self.handleScan()
         if (message.get('Aktion') == "measureOver"):
             if message.get('Found')==True:
                 #zug machen und schicken
