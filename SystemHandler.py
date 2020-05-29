@@ -25,7 +25,7 @@ class SystemHandler:
         self.position = [0,0]
         self.orientation=[1,0]
         self.next_corner = [None, None]
-        self.game = GameHandler(defaultM)  # todo default message
+        self.game = GameHandler(defaultM,kfirst="E")  # todo default message
         self.target=[3,0]
         self.aktivescan=False
         self.scanidx = 0
