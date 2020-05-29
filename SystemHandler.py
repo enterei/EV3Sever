@@ -21,10 +21,10 @@ class SystemHandler:
         self.testHandler=TestHandler(defaultM)
         self.Table[0][0]= 'P'
         self.position = [0,0]
-        self.orientation=[1,0]
+        self.orientation=[-1,0]
         self.next_corner = [None, None]
         self.game = GameHandler(defaultM)  # todo default message
-        self.target=[1,2]
+        self.target=[3,0]
 
 
 
@@ -115,9 +115,7 @@ class SystemHandler:
         if self.dif == [0,0]:
             #self.target=[None,None]
             return True
-        if self.testMove(self.orientation):
-            print("in s : "+ str(self.testMove(self.orientation)))
-            return "s" ##straight
+
         if self.testMove(self.getRight()):
             #print("in r : "+ str(self.testMove(self.orientation)))
 
@@ -126,6 +124,9 @@ class SystemHandler:
             #print("in l : "+ str(self.testMove(self.orientation)))
 
             return "l"
+        if self.testMove(self.orientation):
+            print("in s : "+ str(self.testMove(self.orientation)))
+            return "s" ##straight
         if self.valid(self.getLeft()):
             return "l"
         if self.valid(self.getRight()):

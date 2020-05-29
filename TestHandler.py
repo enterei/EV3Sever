@@ -9,6 +9,8 @@ class TestHandler:
         res =[{}]
         if message.get('Case')=="case1":
            res = self.straight()
+        if message.get('Case')=="case2":
+            res=self.sendwait()
         return res
 
     def straight(self):
@@ -27,3 +29,9 @@ class TestHandler:
         value = input("ecke y: ")
         target.append(int(value))
         return target
+    def sendwait(self):
+        message= self.default_message
+        message['Aktion']='wait'
+
+
+
