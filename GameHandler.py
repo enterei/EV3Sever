@@ -180,7 +180,7 @@ class GameHandler:
             if i not in newres:
                 newres.append(i)
 
-
+        print(newres)
         return newres
 
 

@@ -350,6 +350,7 @@ class SystemHandler:
         return message
     def handleScan(self):
         if not self.aktivescan:
+           print("not here pls")
            self.neutrals= self.game.getNeutral()
            self.scanidx=0
            self.aktivescan=True
