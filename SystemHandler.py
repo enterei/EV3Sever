@@ -32,6 +32,7 @@ class SystemHandler:
         self.Field_to_Table= lookUpTable.LookUpTable()
 
         if self.game.first =="E":
+            print("da")
             self.aktion="waitUser"
             self.nextaktion="findUserInput"
 
