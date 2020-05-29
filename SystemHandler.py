@@ -1,3 +1,4 @@
+import lookUpTable
 from GameHandler import GameHandler
 import json
 
@@ -23,12 +24,13 @@ class SystemHandler:
         self.testHandler=TestHandler(defaultM)
         self.Table[0][0]= 'P'
         self.position = [0,0]
-        self.orientation=[-1,0]
+        self.orientation=[1,0]
         self.next_corner = [None, None]
         self.game = GameHandler(defaultM)  # todo default message
         self.target=[3,0]
         self.aktivescan=False
         self.scanidx = 0
+        self.Field_to_Table= lookUpTable.LookUpTable()
 
         if self.game.first =="E":
             self.aktion="waitUser"
@@ -66,7 +68,11 @@ class SystemHandler:
                 print("zug machen und schicken")
             if self.nextaktion=="findUserInput":#wenn nicht weitersuchen
                 return self.handleScan()
-
+        if (message.get('Aktion') == "measureOver"):
+            if message.get('Found')==True:
+                #zug machen und schicken
+                return self.makeMove()
+                print("zug machen und schicken")
         if (message.get('Aktion') == "Befehl"):
 
 
@@ -78,10 +84,13 @@ class SystemHandler:
                     self.aktion = "wait"
                     self.nextaktion = "wait"
 
+            if self.nextaktion=="waitUser":
+                return self.sendwait()
 
-            if self.nextaktion=="goprep":
+
+            if self.nextaktion=="sendprep":
                 return self.sendprep()
-            if self.nextaktion=="scan":
+            if self.aktion=="scan":
                 if self.aktivescan:
                     if message.get('found'):
                         print(self.scanidx-1)
@@ -104,6 +113,9 @@ class SystemHandler:
                             print(message)
                             self.scanidx=0
                             self.aktivescan=False
+
+                            self.aktion=="sendprep"
+                            self.nextaktion == "sendprep"
                             return message
 
 
@@ -286,57 +298,8 @@ class SystemHandler:
         print("ERROR")
         return None
 
-    def lookUp(self,idx):
-        print("in look up: "+str(idx))
-        if(idx == 0):
-            print("3 0")
-            return [3,0]
-        if (idx == 1):
-            print("3 1")
 
-            return [3, 1]
-        if (idx == 2):
-            print("3 2")
 
-            return [3, 2]
-        if (idx == 3):
-            print("2 0")
-
-            return [2, 0]
-        if (idx == 4):
-            print("2 1")
-
-            return [2, 1]
-        if (idx == 5):
-            print("2 1")
-
-            return [2, 2]
-        if (idx == 6):
-            print("2 2")
-
-            return [1, 0]
-        if (idx == 7):
-            print("1 1")
-
-            return [1, 1]
-        if (idx == 8):
-            print("1 2")
-
-            return [1,2]
-        if (idx == 9):
-            return [1, 2]
-        if (idx == 10):
-            return [2, 2]
-        if (idx == 11):
-            return [2, 3]
-        if (idx == 12):
-            return [3, 0]
-        if (idx == 13):
-            return [3, 1]
-        if (idx == 14):
-            return [3, 2]
-        if (idx == 15):
-            return [3, 3]
 
     def findwholeway(self):
         print("pos: ")
@@ -370,7 +333,13 @@ class SystemHandler:
         message['Aktion'] = 'wait'
     def sendprep(self):
         self.target==[0,0]
+        self.aktion=="scan"
+        self.nextaktion=="sendMove"
         way=self.findwholeway()
+        message = self.default_message
+        message['Aktion'] = "move"
+        message['way'] = way
+        return message
     def handleScan(self):
         if not self.aktivescan:
            neutrals= self.game.getNeutral()
@@ -384,5 +353,22 @@ class SystemHandler:
         print("return:")
         self.scanidx=self.scanidx+1
         return message
+
+    def makemove(self,value):
+        move = self.game.getMove(int(value))
+        if not self.game.game_on:
+            if self.game.winner=="E":
+                return self.sendprep()
+            if self.game.winner==None:
+                return self.sendprep()
+            self.aktion=="sendPrep"
+
+
+        self.target=self.Field_to_Table.lookUpField(move)
+        way=self.findWay()
+        message = self.default_message
+        message['Aktion'] = "move"
+        message['way'] = way
+        print("return:")
 
 
