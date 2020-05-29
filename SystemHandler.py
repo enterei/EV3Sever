@@ -67,7 +67,7 @@ class SystemHandler:
                 #zug machen und schicken
                 print("zug machen und schicken")
             if self.nextaktion=="findUserInput":#wenn nicht weitersuchen
-                neutrals = self.game.getNeutral()
+                self.neutrals = self.game.getNeutral()
                 self.scanidx = 0
                 self.aktivescan = True
                 self.aktion="scan"
@@ -350,10 +350,10 @@ class SystemHandler:
         return message
     def handleScan(self):
         if not self.aktivescan:
-           neutrals= self.game.getNeutral()
+           self.neutrals= self.game.getNeutral()
            self.scanidx=0
            self.aktivescan=True
-        self.target=neutrals[self.scanidx]
+        self.target=self.neutrals[self.scanidx]
         way=self.findwholeway()
         message = self.default_message
         message['Aktion'] = "scan"
