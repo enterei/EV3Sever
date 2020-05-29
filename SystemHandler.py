@@ -354,7 +354,8 @@ class SystemHandler:
            self.scanidx=0
            self.aktivescan=True
        # lookUpTable.L
-        self.target=self.Table.lookUpField(self.neutrals[self.scanidx])
+        self.target=self.Field_to_Table.lookUpField(self.neutrals[self.scanidx])
+     #   self.Table.
 
         way=self.findwholeway()
         message = self.default_message
