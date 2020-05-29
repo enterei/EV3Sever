@@ -167,11 +167,19 @@ class GameHandler:
 
     def getNeutral(self):
         res = []
+        resset={}
         for i in range(9):
            # print(i)
             if self.field[i] == "N":
                 res.append(i)
-        return res
+        if 6 in res:
+            resset.update(6)
+        if 3 in res:
+            resset.update(3)
+        for i in res:
+            resset.update(i)
+
+        return resset
 
 
 def main():
