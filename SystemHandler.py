@@ -14,8 +14,7 @@ class SystemHandler:
     neutral_idx=0
     active =None
     dif=None
-    aktion=None
-    nextaktion=None
+
 
 
 
