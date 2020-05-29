@@ -89,6 +89,8 @@ class SystemHandler:
                         self.aktion == "sendprep"
                         self.nextaktion == "sendprep"
                         return message
+                return self.handleScan()
+
             print("no active scan errorrr")
         if (message.get('Aktion') == "waitOver"):
             if message.get('Found')==True:
@@ -130,7 +132,6 @@ class SystemHandler:
 
 
 
-                return self.handleScan()
 
             if self.game.game_on:
                 self.game.print()
