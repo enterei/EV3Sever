@@ -67,6 +67,11 @@ class SystemHandler:
                 #zug machen und schicken
                 print("zug machen und schicken")
             if self.nextaktion=="findUserInput":#wenn nicht weitersuchen
+                neutrals = self.game.getNeutral()
+                self.scanidx = 0
+                self.aktivescan = True
+                self.aktion="scan"
+                self.nextaktion="makemove"
                 return self.handleScanjson.dumps(messages).encode('utf-8')()
         if (message.get('Aktion') == "measureOver"):
             if message.get('Found')==True:
