@@ -86,6 +86,7 @@ class SystemHandler:
                     self.nextaktion = "findUserInput"
 
             if self.aktion=="waitUser":
+                print("in waitUser")
                 return self.sendwait()
 
 
@@ -332,6 +333,7 @@ class SystemHandler:
     def sendwait(self):
         message = self.default_message
         message['Aktion'] = 'wait'
+        return message
     def sendprep(self):
         self.target==[0,0]
         self.aktion=="scan"
