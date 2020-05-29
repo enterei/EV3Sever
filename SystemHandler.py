@@ -67,6 +67,7 @@ class SystemHandler:
                 #zug machen und schicken
                 print("zug machen und schicken")
             if self.nextaktion=="findUserInput":#wenn nicht weitersuchen
+                print("in findUserInput")
                 self.neutrals = self.game.getNeutral()
                 self.scanidx = 0
                 self.aktivescan = True
@@ -75,6 +76,7 @@ class SystemHandler:
                 return self.handleScan()
         if (message.get('Aktion') == "measureOver"):
             if message.get('Found')==True:
+                print("in zug machen")
                 #zug machen und schicken
                 return self.makeMove()
                 print("zug machen und schicken")
@@ -357,6 +359,8 @@ class SystemHandler:
            self.scanidx=0
            self.aktivescan=True
        # lookUpTable.L
+        print("before lookup neutrals value")
+        print(self.neutrals[self.scanidx])
         self.target=self.Field_to_Table.lookUpField(self.neutrals[self.scanidx])
      #   self.Table.
         print("target in handle scan:")
@@ -370,6 +374,7 @@ class SystemHandler:
         return message
 
     def makemove(self,value):
+        print("in make move")
         move = self.game.getMove(int(value))
         if not self.game.game_on:
             if self.game.winner=="E":
