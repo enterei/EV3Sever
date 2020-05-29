@@ -67,7 +67,7 @@ class SystemHandler:
                 #zug machen und schicken
                 print("zug machen und schicken")
             if self.nextaktion=="findUserInput":#wenn nicht weitersuchen
-                return self.handleScan()
+                return self.handleScanjson.dumps(messages).encode('utf-8')()
         if (message.get('Aktion') == "measureOver"):
             if message.get('Found')==True:
                 #zug machen und schicken
@@ -81,8 +81,8 @@ class SystemHandler:
             if not self.game.game_on:
                 self.game = GameHandler(self.default_message)
                 if self.game.first == "E":
-                    self.aktion = "wait"
-                    self.nextaktion = "wait"
+                    self.aktion = "waitUser"
+                    self.nextaktion = "findUserInput"
 
             if self.nextaktion=="waitUser":
                 return self.sendwait()
