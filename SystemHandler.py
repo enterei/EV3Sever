@@ -313,6 +313,7 @@ class SystemHandler:
         print(self.position)
         print("or: ")
         print(self.orientation)
+        print("target:")
         print(self.target)
         loop = False
         way=""
@@ -340,6 +341,7 @@ class SystemHandler:
         message['Aktion'] = 'wait'
         return message
     def sendprep(self):
+        print("in prep no?")
         self.target==[0,0]
         self.aktion=="scan"
         self.nextaktion=="sendMove"
@@ -357,7 +359,8 @@ class SystemHandler:
        # lookUpTable.L
         self.target=self.Field_to_Table.lookUpField(self.neutrals[self.scanidx])
      #   self.Table.
-
+        print("target in handle scan:")
+        print(self.target)
         way=self.findwholeway()
         message = self.default_message
         message['Aktion'] = "scan"
