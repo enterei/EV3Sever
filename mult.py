@@ -123,7 +123,7 @@ defaultM={'speed':pargs.speed,'time':pargs.time,'ms':pargs.ms,
 # ...
 
 message_handelr=SystemHandler(defaultM)
-host = '192.168.0.178'  # The server's hostname or IP address
+host = '192.168.0.179'  # The server's hostname or IP address
 port = 65432
 lsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 lsock.bind((host, port))
