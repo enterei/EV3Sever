@@ -176,6 +176,22 @@ class GameHandler:
             newres.append(6)
         if 3 in res:
             newres.append(3)
+        if 0 in res:
+            newres.append(0)
+        if 1 in res:
+            newres.append(1)
+        if 2 in res:
+            newres.append(2)
+
+        if 4 in res:
+            newres.append(4)
+        if 5 in res:
+            newres.append(5)
+
+        if 7 in res:
+            newres.append(7)
+        if 8 in res:
+            newres.append(8)
         for i in res:
             if i not in newres:
                 newres.append(i)
