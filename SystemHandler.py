@@ -62,36 +62,7 @@ class SystemHandler:
         if(message.get('Aktion')=="Test"):
             print("in test")
             return self.testHandler.handleMessage(message)
-        if message.get('Aktion')=="scan":
-            if self.aktivescan:
-                if message.get('found'):
-                    print(self.scanidx - 1)
-                    x = input("yours?")
-                    if x == "":
-                        move = self.game.getMove(int(self.scanidx - 1))
-                        print("davor targetting:")
-                        print(self.target)
-                        print("davor move:")
-                        print(move)
-                        self.target = self.lookUp(move)
-                        print("targetting:")
-                        print(self.target)
-                        way = self.findwholeway()
-                        #  return self.doMove(self.findWay())
-                        message = self.default_message
-                        message['Aktion'] = "move"
-                        message['way'] = way
-                        print("return:")
-                        print(message)
-                        self.scanidx = 0
-                        self.aktivescan = False
 
-                        self.aktion == "sendprep"
-                        self.nextaktion == "sendprep"
-                        return message
-                return self.handleScan()
-
-            print("no active scan errorrr")
 
         if (message.get('Aktion') == "measureOver"):
             if message.get('Found')==True:
