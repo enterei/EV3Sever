@@ -157,6 +157,7 @@ class SystemHandler:
 
 
             if self.aktion=="sendprep":
+                print("send prep")
                 return self.sendprep()
 
             if (self.aktion == "waiting" and self.nextaktion=="UserInputFind"):
