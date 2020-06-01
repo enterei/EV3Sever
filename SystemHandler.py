@@ -90,10 +90,11 @@ class SystemHandler:
             if self.aktion == "UserInputFind":
                 if self.aktivescan:
                     if message.get('found'):
-                        print(self.Field_to_Table.lookUpTable(self.position))
+                        input=self.Field_to_Table.lookUpTable(self.position)
+                        print(input)
                         x = input("yours?")
                         if x == "":
-                            move = self.game.getMove(int(self.scanidx - 1))
+                            move = self.game.getMove(input)
                         else:
                             move=x
 
