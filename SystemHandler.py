@@ -204,8 +204,7 @@ class SystemHandler:
 
 
         self.dif=[self.target[0]-self.position[0],self.target[1]-self.position[1]] #difference
-        print("dif: ")
-        print(self.dif)
+
         if self.dif == [0,0]:
             #self.target=[None,None]
             return True
@@ -295,7 +294,6 @@ class SystemHandler:
         print(self.position[0]+move[0])
         print(self.position[1]+move[1])
         if self.position[0]+move[0]>3  or self.position[0]+move[0]<0 or self.position[1]+move[1]>3  or self.position[1]+move[1]<0:
-            print("nOT FUCKING VALID: "+ str(move[0])+ " "+ str(move[1]))
             return None
         return [self.position[0]+move[0],self.position[1]+move[1]]
 
@@ -329,12 +327,7 @@ class SystemHandler:
 
 
     def findwholeway(self):
-        print("pos: ")
-        print(self.position)
-        print("or: ")
-        print(self.orientation)
-        print("target:")
-        print(self.target)
+
         loop = False
         way=""
         i = 1
@@ -384,8 +377,7 @@ class SystemHandler:
            self.scanidx=0
            self.aktivescan=True
        # lookUpTable.L
-        print("before lookup neutrals value")
-        print(self.neutrals[self.scanidx])
+
         self.target=self.Field_to_Table.lookUpField(self.neutrals[self.scanidx])
      #   self.Table.
         print("target in handle scan:")
@@ -394,7 +386,7 @@ class SystemHandler:
         message = self.default_message
         message['Aktion'] = "scan"
         message['way'] = way
-        print("return:")
+
         self.scanidx=self.scanidx+1
         return message
 

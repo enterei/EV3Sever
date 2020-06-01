@@ -58,7 +58,7 @@ def service_connection(key, mask):
         print("in read")
         recv_data = sock.recv(1024)  # Should be ready to read
         if recv_data:
-            #data.outb += recv_data
+            #data.outb += rein readcv_data
             print(recv_data)
             print("here???")
         else:
@@ -102,7 +102,7 @@ def rec(key,mask):
        # print(recv_data)
         if recv_data:
             # data.outb += recv_data
-            print("ga")
+            print("received Data:")
             print(recv_data)
             return recv_data
         else:
@@ -147,9 +147,9 @@ while True:
            # print(res)TTT.doSomething(res)
 
             if res != None:
-                print(res)
+                #print(res)
                 message=message_handelr.handleMessage(res)
-                print(message)
+
             if message !=None:
                 print("m!=NOne")
                 message=res_bytes = json.dumps(message).encode('utf-8')
