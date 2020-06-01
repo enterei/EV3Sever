@@ -92,18 +92,7 @@ class SystemHandler:
                 return self.handleScan()
 
             print("no active scan errorrr")
-        if (message.get('Aktion') == "waitOver"):
-            if message.get('Found')==True:
-                #zug machen und schicken
-                print("zug machen und schicken")
-            if self.nextaktion=="findUserInput":#wenn nicht weitersuchen
-                print("in findUserInput")
-                self.neutrals = self.game.getNeutral()
-                self.scanidx = 0
-                self.aktivescan = True
-                self.aktion="scan"
-                self.nextaktion="makemove"
-                return self.handleScan()
+
         if (message.get('Aktion') == "measureOver"):
             if message.get('Found')==True:
                 print("in zug machen")
@@ -126,11 +115,57 @@ class SystemHandler:
                 print("in waitUser")
                 return self.sendwait()
 
+            if self.aktion == "UserInputFind":
+                if self.aktivescan:
+                    if message.get('found'):
+                        print(self.scanidx - 1)
+                        x = input("yours?")
+                        if x == "":
+                            move = self.game.getMove(int(self.scanidx - 1))
+                            print("davor targetting:")
+                            print(self.target)
+                            print("davor move:")
+                            print(move)
+                            self.target = self.lookUp(move)
+                            print("targetting:")
+                            print(self.target)
+                            way = self.findwholeway()
+                            #  return self.doMove(self.findWay())
+                            message = self.default_message
+                            message['Aktion'] = "move"
+                            message['way'] = way
+                            print("return:")
+                            print(message)
+                            self.scanidx = 0
+                            self.aktivescan = False
+
+                            self.aktion == "sendprep"
+                            self.nextaktion == "sendprep"
+                            return message
+                    return self.handleScan()
+
+                print("no active scan errorrr")
+
+
+
+
+
+
 
             if self.nextaktion=="sendprep":
                 return self.sendprep()
 
+            if (self.aktion == "waiting" and self.nextaktion=="UserInputFind"):
 
+
+                if self.nextaktion == "UserInputFind":  # wenn nicht weitersuchen
+                    print("in findUserInput")
+                    self.neutrals = self.game.getNeutral()
+                    self.scanidx = 0
+                    self.aktivescan = True
+                    self.aktion = "UserInputFind"
+                    self.nextaktion = "makemove"
+                    return self.handleScan()
 
 
             if self.game.game_on:
@@ -333,6 +368,10 @@ class SystemHandler:
             i=i+1
         print("way would be:")
         print(way)
+        print("resting pos:")
+        print(self.position)
+        print("rest or:")
+        print(self.orientation)
         return way
 
     def print(self):
@@ -344,6 +383,8 @@ class SystemHandler:
     def sendwait(self):
         message = self.default_message
         message['Aktion'] = 'wait'
+        self.aktion="waiting"
+        self.nextaktion="UserInputFind"
         return message
     def sendprep(self):
         print("in prep no?")
