@@ -145,6 +145,8 @@ class SystemHandler:
 
                         self.aktion == "sendprep"
                         self.nextaktion == "sendprep"
+                        print("hinterhernim found")
+                        print(self.aktion)
                         return message
                     return self.handleScan()
 
@@ -386,6 +388,7 @@ class SystemHandler:
         print(self.Table[3][0]+" "+self.Table[3][1]," "+self.Table[3][2]+ " "+self.Table[3][3])
 
     def sendwait(self):
+        print("in send wait")
         message = self.default_message
         message['Aktion'] = 'wait'
         self.aktion="waiting"
