@@ -4,23 +4,23 @@ class LookUpTable:
         print("looking up")
         print(idx)
         if (idx == 0):
-            return [2, 0]
+            return [3, 0]
         if (idx == 1):
-            return [2, 1]
+            return [3, 1]
         if (idx == 2):
-            return [2, 2]
+            return [3, 2]
         if (idx == 3):
-            return [1, 0]
+            return [2, 0]
         if (idx == 4):
-            return [1, 1]
+            return [2, 1]
         if (idx == 5):
-            return [1, 2]
+            return [2, 2]
         if (idx == 6):
-            return [0, 0]
+            return [1, 0]
         if (idx == 7):
-            return [0, 1]
+            return [1, 1]
         if (idx == 8):
-            return [0, 2]
+            return [1, 2]
 
     def lookUpTable(self, idx):
         if idx[0] == 2 and idx[1] == 0:
