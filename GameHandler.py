@@ -183,10 +183,10 @@ class GameHandler:
         if 2 in res:
             newres.append(2)
 
-        if 4 in res:
-            newres.append(4)
         if 5 in res:
             newres.append(5)
+        if 4 in res:
+            newres.append(4)
 
         if 7 in res:
             newres.append(7)
