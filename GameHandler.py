@@ -197,7 +197,7 @@ class GameHandler:
                 newres.append(i)
 
         print(newres)
-        return newres
+        return res
 
 
 def main():
