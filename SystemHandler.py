@@ -64,6 +64,7 @@ class SystemHandler:
             return self.testHandler.handleMessage(message)
 
 
+
         if (message.get('Aktion') == "measureOver"):
             if message.get('Found')==True:
                 print("in zug machen")
@@ -114,8 +115,8 @@ class SystemHandler:
                         self.scanidx = 0
                         self.aktivescan = False
 
-                        self.aktion == "sendprep"
-                        self.nextaktion == "sendprep"
+                        self.aktion = "sendprep"
+                        self.nextaktion = "sendprep"
                         print("hinterhernim found")
                         print(self.aktion)
                         return message
