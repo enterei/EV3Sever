@@ -172,10 +172,8 @@ class GameHandler:
            # print(i)
             if self.field[i] == "N":
                 res.append(i)
-        if 6 in res:
-            newres.append(6)
-        if 3 in res:
-            newres.append(3)
+
+
         if 0 in res:
             newres.append(0)
         if 1 in res:
@@ -187,17 +185,19 @@ class GameHandler:
             newres.append(5)
         if 4 in res:
             newres.append(4)
+        if 3 in res:
+            newres.append(3)
+        if 6 in res:
+            newres.append(6)
 
         if 7 in res:
             newres.append(7)
         if 8 in res:
             newres.append(8)
-        for i in res:
-            if i not in newres:
-                newres.append(i)
+
 
         print(newres)
-        return res
+        return newres
 
 
 def main():
