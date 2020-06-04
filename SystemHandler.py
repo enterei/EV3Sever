@@ -398,7 +398,7 @@ class SystemHandler:
      #   self.Table.
         print("target in handle scan:")
         print(self.target)
-        way=self.findwholeway()
+        way=self.findwholeway(scan=True)
         message = self.default_message
         message['Aktion'] = "scan"
         message['way'] = way
