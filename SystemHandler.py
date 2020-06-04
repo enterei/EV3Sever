@@ -348,8 +348,11 @@ class SystemHandler:
                     print("dazwischen ist eins vorgekommen das scan amal")
                     break
             else:
+                print("in else")
                 print(self.Field_to_Table.lookUpTable(self.position))
                 print(self.neutrals)
+                print(type(self.neutrals[0]))
+                print(type(self.Field_to_Table.lookUpTable(self.position)))
         print("way would be:")
         print(way)
         print("resting pos:")
