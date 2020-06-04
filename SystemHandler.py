@@ -96,7 +96,7 @@ class SystemHandler:
                         if x == "":
                             move = self.game.getMove(inputvalue)
                         else:
-                            move=int(x)
+                            move=self.game.getMove(int(x))
 
                         print("davor targetting:")
                         print(self.target)
