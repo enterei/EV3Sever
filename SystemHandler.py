@@ -121,6 +121,10 @@ class SystemHandler:
                         print("hinterhernim found")
                         print(self.aktion)
                         return message
+                    if self.position == self.Field_to_Table.lookUpField(self.neutrals[self.scanidx]):
+                        print("ist das selbe erhöhen")
+                        self.scanidx = self.scanidx + 1
+
                     return self.handleScan()
 
                     print("no active scan errorrr")
@@ -326,19 +330,22 @@ class SystemHandler:
 
 
 
-    def findwholeway(self):
+    def findwholeway(self,scan=False):
 
         loop = False
         way=""
         i = 1
         while not loop:
-            x = self.findWay()
+            x = self.findWay(scan)
             if x == True:
                 break
             if x == None:
                 break
             way=way+self.doMove(x)
-            i=i+1
+            i=i+1 # i brauc ich nicht
+            if scan:
+                if self.Field_to_Table.lookUpTable(self.position) in self.neutrals:
+                    break
         print("way would be:")
         print(way)
         print("resting pos:")
@@ -387,7 +394,6 @@ class SystemHandler:
         message['Aktion'] = "scan"
         message['way'] = way
 
-        self.scanidx=self.scanidx+1
         return message
 
     def makemove(self,value):

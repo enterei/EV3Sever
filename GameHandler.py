@@ -71,6 +71,7 @@ class GameHandler:
                 print("wrong move by: " + str("E"))
                 self.wins("M")
                 return False
+
         if self.checkEnd():  # check if game ended  Enemy Won?
             return False
         zug = self.thinkMove(new_marked_field_number)
