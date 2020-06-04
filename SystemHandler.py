@@ -336,7 +336,7 @@ class SystemHandler:
         way=""
         i = 1
         while not loop:
-            x = self.findWay(scan)
+            x = self.findWay()
             if x == True:
                 break
             if x == None:
