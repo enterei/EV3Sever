@@ -345,6 +345,7 @@ class SystemHandler:
             i=i+1 # i brauc ich nicht
             if scan:
                 if self.Field_to_Table.lookUpTable(self.position) in self.neutrals:
+                    print("dazwischen ist eins vorgekommen das scan amal")
                     break
         print("way would be:")
         print(way)
