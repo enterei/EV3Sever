@@ -8,7 +8,7 @@ from TestHandler import TestHandler
 class SystemHandler:
 
 
-    Table = [['N', 'N', 'N', 'N'], ['N', 'N', 'N', 'N'], ['N', 'N', 'N', 'N'], ['N', 'N', 'N', 'N']]
+    Table = [['N', 'N', 'N', 'N'], ['N', 'N', 'N', 'N'], ['N', 'N', 'N', 'N'], ['N', 'N', 'N', 'N']] #Table loaded all neutral
     next_corner=[None,None]
     neutrals =[]
     neutral_idx=0
@@ -19,10 +19,10 @@ class SystemHandler:
 
 
     def __init__(self,defaultM):
-        self.default_message=defaultM
+        self.default_message=defaultM #default message that sends parameter for the roboter
         self.testHandler=TestHandler(defaultM)
-        self.Table[0][0]= 'P'
-        self.position = [0,0]
+
+        self.position = [0,0] #position of robot
         self.orientation=[1,0]
         self.next_corner = [None, None]
         self.game = GameHandler(defaultM,kfirst="E")  # todo default message
@@ -303,11 +303,6 @@ class SystemHandler:
         print(self.orientation)
         return way
 
-    def print(self):
-        print(self.Table[0][0]+" "+self.Table[0][1]," "+self.Table[0][2]+ " "+self.Table[0][3])
-        print(self.Table[1][0]+" "+self.Table[1][1]," "+self.Table[1][2]+ " "+self.Table[1][3])
-        print(self.Table[2][0]+" "+self.Table[2][1]," "+self.Table[2][2]+ " "+self.Table[2][3])
-        print(self.Table[3][0]+" "+self.Table[3][1]," "+self.Table[3][2]+ " "+self.Table[3][3])
 
     def sendwait(self):
         print("in send wait")
