@@ -51,9 +51,7 @@ class SystemHandler:
         print("message:")
         print(message)
 
-        if(message.get('ID')=="System"):
-            print("NEEEEEEEEEEEEEEEEEEEEEE DAAAAAAAAAAAAA LOESCHEN")
-            self.handleSystem(message)
+
         if(message.get('Aktion')=="Test"): # for testing
             print("in test")
             return self.testHandler.handleMessage(message)
@@ -123,38 +121,7 @@ class SystemHandler:
                     return self.handleScan()
 
 
-            if self.game.game_on:
-                print("NEEEEEEEEEEEEEEEEEEEEEEEIN GAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAME ON")
-                self.game.print()
-                value = input("wählen sie ihr Feld: ")
-                move= self.game.getMove(int(value))
-                print("davor targetting:")
-                print(self.target)
-                print("davor move:")
-                print(move)
-                self.target = self.lookUp(move)
-                print("targetting:")
-                print(self.target)
-                way = self.findwholeway()
-                #  return self.doMove(self.findWay())
-                message = self.default_message
-                message['Aktion'] = "move"
-                message['way'] = way
-                print("return:")
-                print(message)
-                return message
 
-                print(value)
-            print("in Befehl")
-
-            way =self.findwholeway()
-              #  return self.doMove(self.findWay())
-            message=self.default_message
-            message['Aktion']="move"
-            message['way']=way
-            print("return:")
-            print(message)
-            return message
         if message.get('Aktion') == "endwait":
             print("endwait on server")
     def handleSystem(self,message):
