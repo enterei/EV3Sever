@@ -284,6 +284,7 @@ class SystemHandler:
         return message
 
     def makemove(self,value):
+        print("in make move")
         move = self.game.getMove(int(value)) #send the players move to the gamehandle & get the roboter move back
         if not self.game.game_on:
             if self.game.winner=="E":
