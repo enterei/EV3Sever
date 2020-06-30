@@ -380,4 +380,9 @@ class SystemHandler:
         print(self.aktion)
         return message
 
+    def printPos(self):
+        print("position and orientation of robot")
+        print(self.position)
+        print(self.orientation)
+
 
