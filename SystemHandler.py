@@ -23,16 +23,16 @@ class SystemHandler:
         self.testHandler=TestHandler(defaultM)
 
         self.position = [0,0] #position of robot
-        self.orientation=[1,0]
+        self.orientation=[1,0] #orientation of robot
         self.next_corner = [None, None]
-        self.game = GameHandler(defaultM,kfirst="E")  # todo default message
+        self.game = GameHandler(defaultM,kfirst="E")  # todo default message    Gamhehandler handles the gamelogic and the AI of the robot
         self.target=[3,0]
         self.aktivescan=False
         self.scanidx = 0
-        self.Field_to_Table= lookUpTable.LookUpTable()
+        self.Field_to_Table= lookUpTable.LookUpTable() # class to cast from an edge to a field and back
 
         if self.game.first =="E":
-            print("human player satrts")
+            print("human player starts")
             self.aktion="waitUser"
             self.nextaktion="findUserInput"
 
@@ -45,8 +45,7 @@ class SystemHandler:
 
 
 
-    def handleMessage(self,message):
-        print("in handle message")
+    def handleMessage(self,message): #handle message
         message=json.loads(message.decode('utf-8'))  #decode the the message
         print("message:")
         print(message)
@@ -60,43 +59,41 @@ class SystemHandler:
 
         if (message.get('Aktion') == "measureOver"):
             if message.get('Found')==True:
-                print("in zug machen")
+
                 #zug machen und schicken
                 return self.makeMove()
-                print("zug machen und schicken")
-        if (message.get('Aktion') == "Befehl"):
-            print(self.aktion)
-            print(self.nextaktion)
 
-            if not self.game.game_on:
+        if (message.get('Aktion') == "Befehl"): #determine in what state the server is to correctly respond
+
+
+            if not self.game.game_on: #start new game
                 self.game = GameHandler(self.default_message)
                 if self.game.first == "E":
                     self.aktion = "waitUser"
                     self.nextaktion = "findUserInput"
 
-            if self.aktion=="waitUser":
-                print("in waitUser")
+            if self.aktion=="waitUser": #send wait
                 return self.sendwait()
 
-            if self.aktion == "UserInputFind":
+            if self.aktion == "UserInputFind": #look for marked field
                 if self.aktivescan:
-                    if message.get('found'):
+                    if message.get('found'): #merked field was found
                         inputvalue =self.Field_to_Table.lookUpTable(self.position)
 
                         return self.endscan(inputvalue)
-                    if self.scanidx >= len(self.neutrals):
+                    if self.scanidx >= len(self.neutrals): # walked through whole field and npthing found
                         x = input("where did you play?")
                         return self.endscan(x)
-                    if self.position == self.Field_to_Table.lookUpField(self.neutrals[self.scanidx]):
+                    if self.position == self.Field_to_Table.lookUpField(self.neutrals[self.scanidx]): #nothing found on the current posiiton
                         print("ist das selbe erhöhen")
                         self.scanidx = self.scanidx + 1
 
 
 
 
-                    return self.handleScan()
+                    return self.handleScan() #determine where to scan next
 
-                    print("no active scan errorrr")
+
 
 
 
@@ -128,23 +125,7 @@ class SystemHandler:
         print("System message")
 
 
-
-
-    def handleAktion(self, message):
-        if(message.get('Turn')):
-            self.getEnemyMove()
-            return self.getOrder()
-    def getOrder(self):
-        if self.active=="getEnemeyMove":
-            if self.target:
-                order=self.findWay()
-    def findWay(self):
-        print("pos: ")
-        print(self.position)
-        print("or: ")
-        print(self.orientation)
-        print(self.target)
-
+    def findWay(self): # find next field to go
 
         self.dif=[self.target[0]-self.position[0],self.target[1]-self.position[1]] #difference
 
@@ -161,7 +142,6 @@ class SystemHandler:
 
             return "l"
         if self.testMove(self.orientation):
-            print("in s : "+ str(self.testMove(self.orientation)))
             return "s" ##straight
         if self.valid(self.getLeft()):
             return "l"
@@ -170,14 +150,10 @@ class SystemHandler:
         print("ERRRRRRRRRROR")
         return None
 
-    def doMove(self,m):
+    def doMove(self,m): #execute the move in self table AND add letter for way command to the path that will be send to roboter
         if m =="s":
-            print("in s")
             self.position[0]=self.position[0]+self.orientation[0]
             self.position[1] = self.position[1] + self.orientation[1]
-          #  message['mode']='way'
-         #   message['way']='s'
-           # message['Aktion']='move'
             return 's'
         if m =="r":
             print("in r")
@@ -185,32 +161,17 @@ class SystemHandler:
             self.position[0] = self.position[0] + self.getRight()[0]
             self.position[1] = self.position[1] + self.getRight()[1]
             self.orientation = self.getRight()
-          #  message['way']='r'
-            #message['Aktion']='move'
-
             return 'r'
 
         if m =="l":
-            print("in l")
-
             self.position[0] = self.position[0] + self.getLeft()[0]
             self.position[1] = self.position[1] + self.getLeft()[1]
             self.orientation=self.getLeft()
-            #message['way']='l'
-            #message['Aktion']='move'
-
             return 'l'
 
-
-
-
-    def setGoal(self,corner):
-        self.target=corner
-
-    def testMove(self,testmove):
-        testmove = self.valid(testmove)
+    def testMove(self,testmove): # test the given move if its a improvement
+        testmove = self.valid(testmove) #valid function checks if move is possible or out of bounds
         if testmove == None:
-            print("test not valid")
             return False
         else :
             helpdifx=self.dif[0]
@@ -230,12 +191,10 @@ class SystemHandler:
                 diftesty=diftesty *-1
             testsum= diftestx+diftesty
             if testsum< difsum:
-                return testmove
+                return testmove # if move is a improvemnt return the move, else fasle
             return False
 
-    def valid(self,move):
-        print(self.position[0]+move[0])
-        print(self.position[1]+move[1])
+    def valid(self,move): # checks if given move is a valid move and not out of bounds
         if self.position[0]+move[0]>3  or self.position[0]+move[0]<0 or self.position[1]+move[1]>3  or self.position[1]+move[1]<0:
             return None
         return [self.position[0]+move[0],self.position[1]+move[1]]
@@ -243,7 +202,7 @@ class SystemHandler:
     def testRight(self):
         self.testMove(self.getRight())
 
-    def getRight(self):
+    def getRight(self): #return orientation after turning right
         if self.orientation[0] == 1:
             return [0,1]
         if self.orientation[0] ==-1:
@@ -254,7 +213,7 @@ class SystemHandler:
             return [1,0]
         print("ERROR")
         return None
-    def getLeft(self):
+    def getLeft(self): #return orientation after turning left
         if self.orientation[0] == 1:
             return [0,-1]
         if self.orientation[0] ==-1:
@@ -269,7 +228,7 @@ class SystemHandler:
 
 
 
-    def findwholeway(self,scan=False):
+    def findwholeway(self,scan=False): #finds the whole way from the given position to target & returns the way as string
 
         loop = False
         way=""
@@ -282,37 +241,22 @@ class SystemHandler:
                 break
             way=way+self.doMove(x)
             i=i+1 # i brauc ich nicht
-            if scan:
+            if scan: #if scanning the robot should scan the neutral points in between the given position and the target
                 if self.Field_to_Table.lookUpTable(self.position) in self.neutrals:
                     self.neutrals.remove(self.Field_to_Table.lookUpTable(self.position))
-                    print("dazwischen ist eins vorgekommen das scan amal")
                     break
-            else:
-                print("in else")
-                print(self.Field_to_Table.lookUpTable(self.position))
-                print(self.neutrals)
-               # print(type(self.neutrals[0]))
-                print(type(self.Field_to_Table.lookUpTable(self.position)))
-                if 6 in self.neutrals:
-                    print("BAAAAAby")
-        print("way would be:")
-        print(way)
-        print("resting pos:")
-        print(self.position)
-        print("rest or:")
-        print(self.orientation)
-        return way
+        return way #return way as string
 
 
-    def sendwait(self):
+    def sendwait(self): #send a wait to the robot
         print("in send wait")
         message = self.default_message
         message['Aktion'] = 'wait'
         self.aktion="waiting"
         self.nextaktion="UserInputFind"
         return message
-    def sendprep(self):
-        print("in prep no?")
+    def sendprep(self): #send a preperation to robot (not used)
+
         self.target==[0,0]
         self.aktion = "waitUser"
         self.nextaktion = "findUserInput"
@@ -321,28 +265,26 @@ class SystemHandler:
         message['Aktion'] = "move"
         message['way'] = way
         return message
-    def handleScan(self):
+    def handleScan(self): # handle the scan algorithm
         if not self.aktivescan:
-           print("not here pls")
-           self.neutrals= self.game.getNeutral()
-           self.scanidx=0
-           self.aktivescan=True
+
+           self.neutrals= self.game.getNeutral() #get array of neutral fields
+           self.scanidx=0 #set index to 0
+           self.aktivescan=True #set sacn to active
        # lookUpTable.L
 
-        self.target=self.Field_to_Table.lookUpField(self.neutrals[self.scanidx])
+        self.target=self.Field_to_Table.lookUpField(self.neutrals[self.scanidx]) #target first field of the neutral array
      #   self.Table.
-        print("target in handle scan:")
-        print(self.target)
-        way=self.findwholeway(scan=True)
-        message = self.default_message
+
+        way=self.findwholeway(scan=True) #find the way
+        message = self.default_message #build message
         message['Aktion'] = "scan"
         message['way'] = way
 
         return message
 
     def makemove(self,value):
-        print("in make move")
-        move = self.game.getMove(int(value))
+        move = self.game.getMove(int(value)) #send the players move to the gamehandle & get the roboter move back
         if not self.game.game_on:
             if self.game.winner=="E":
                 return self.sendprep()
@@ -351,14 +293,15 @@ class SystemHandler:
             self.aktion=="sendPrep"
 
 
-        self.target=self.Field_to_Table.lookUpField(move)
-        way=self.findWay()
+        self.target=self.Field_to_Table.lookUpField(move) #target the field
+        way=self.findWay() #find the way to the field
         message = self.default_message
         message['Aktion'] = "move"
         message['way'] = way
         print("return:")
-
+        return message
     def endscan(self,inputvalue):
+        print(inputvalue)
         x = input("yours?")
         if x == "":
             move = self.game.getMove(inputvalue)
