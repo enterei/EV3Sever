@@ -112,12 +112,13 @@ class SystemHandler:
                         print("hinterhernim found")
                         print(self.aktion)
                         return message
+                    if self.scanidx >= len(self.neutrals):
+                        x = input("where did you play?")
+                        return self.endscan(x)
                     if self.position == self.Field_to_Table.lookUpField(self.neutrals[self.scanidx]):
                         print("ist das selbe erhöhen")
                         self.scanidx = self.scanidx + 1
-                        if self.scanidx >= len(self.neutrals):
-                            x = input("where did you play?")
-                            return self.endscan(x)
+
 
 
 
