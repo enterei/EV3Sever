@@ -153,7 +153,7 @@ while True:
             if message !=None:
                 print("m!=NOne")
                 message=res_bytes = json.dumps(message).encode('utf-8')
-                SystemHandler.printPos()
+                message_handelr.printPos()
                 send(key,mask,message)
                 message=None
 
