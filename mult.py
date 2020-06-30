@@ -153,6 +153,9 @@ while True:
             if message !=None:
                 print("m!=NOne")
                 message=res_bytes = json.dumps(message).encode('utf-8')
+                print("position and oorientation of robot:")
+                print(SystemHandler.position)
+                print(SystemHandler.orientation)
                 send(key,mask,message)
                 message=None
 
