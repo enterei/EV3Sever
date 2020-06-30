@@ -97,17 +97,8 @@ class SystemHandler:
                             move = self.game.getMove(inputvalue)
                         else:
                             move=self.game.getMove(int(x))
-
-                        print("davor targetting:")
-                        print(self.target)
-                        print("davor move:")
-                        print(move)
-                        #  self.target = self.lookUp(move)
                         self.target = self.Field_to_Table.lookUpField(move)
-                        print("targetting:")
-                        print(self.target)
                         way = self.findwholeway()
-                        #  return self.doMove(self.findWay())
                         message = self.default_message
                         message['Aktion'] = "move"
                         message['way'] = way
@@ -124,6 +115,11 @@ class SystemHandler:
                     if self.position == self.Field_to_Table.lookUpField(self.neutrals[self.scanidx]):
                         print("ist das selbe erhöhen")
                         self.scanidx = self.scanidx + 1
+                        if self.scanidx >= len(self.neutrals):
+                            x = input("where did you play?")
+                            return self.endscan(x)
+
+
 
                     return self.handleScan()
 
@@ -345,6 +341,7 @@ class SystemHandler:
             i=i+1 # i brauc ich nicht
             if scan:
                 if self.Field_to_Table.lookUpTable(self.position) in self.neutrals:
+                    self.neutrals.remove(self.Field_to_Table.lookUpTable(self.position))
                     print("dazwischen ist eins vorgekommen das scan amal")
                     break
             else:
@@ -422,5 +419,27 @@ class SystemHandler:
         message['Aktion'] = "move"
         message['way'] = way
         print("return:")
+
+    def endscan(self,inputvalue):
+        x = input("yours?")
+        if x == "":
+            move = self.game.getMove(inputvalue)
+        else:
+            move = self.game.getMove(int(x))
+        self.target = self.Field_to_Table.lookUpField(move)
+        way = self.findwholeway()
+        message = self.default_message
+        message['Aktion'] = "move"
+        message['way'] = way
+        print("return:")
+        print(message)
+        self.scanidx = 0
+        self.aktivescan = False
+
+        self.aktion = "sendprep"
+        self.nextaktion = "sendprep"
+        print("hinterhernim found")
+        print(self.aktion)
+        return message
 
 
