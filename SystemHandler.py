@@ -57,11 +57,7 @@ class SystemHandler:
 
 
 
-        if (message.get('Aktion') == "measureOver"):
-            if message.get('Found')==True:
 
-                #zug machen und schicken
-                return self.makeMove()
 
         if (message.get('Aktion') == "Befehl"): #determine in what state the server is to correctly respond
 
@@ -283,26 +279,9 @@ class SystemHandler:
 
         return message
 
-    def makemove(self,value):
-        print("in make move")
-        move = self.game.getMove(int(value)) #send the players move to the gamehandle & get the roboter move back
-        if not self.game.game_on:
-            if self.game.winner=="E":
-                return self.sendprep()
-            if self.game.winner==None:
-                return self.sendprep()
-            self.aktion=="sendPrep"
 
-
-        self.target=self.Field_to_Table.lookUpField(move) #target the field
-        way=self.findWay() #find the way to the field
-        message = self.default_message
-        message['Aktion'] = "move"
-        message['way'] = way
-        print("return:")
-        return message
-    def endscan(self,inputvalue):
-        print(inputvalue)
+    def endscan(self,inputvalue): #ends the scan, get
+        print(inputvalue) #check if value was correct
         x = input("yours?")
         if x == "":
             move = self.game.getMove(inputvalue)
@@ -313,15 +292,14 @@ class SystemHandler:
         message = self.default_message
         message['Aktion'] = "move"
         message['way'] = way
-        print("return:")
-        print(message)
+
         self.scanidx = 0
         self.aktivescan = False
 
         self.aktion = "sendprep"
         self.nextaktion = "sendprep"
-        print("hinterhernim found")
-        print(self.aktion)
+
+
         return message
 
     def printPos(self):
