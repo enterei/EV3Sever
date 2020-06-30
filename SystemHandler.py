@@ -349,7 +349,7 @@ class SystemHandler:
                 print("in else")
                 print(self.Field_to_Table.lookUpTable(self.position))
                 print(self.neutrals)
-                print(type(self.neutrals[0]))
+               # print(type(self.neutrals[0]))
                 print(type(self.Field_to_Table.lookUpTable(self.position)))
                 if 6 in self.neutrals:
                     print("BAAAAAby")
