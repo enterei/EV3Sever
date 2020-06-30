@@ -32,34 +32,29 @@ class SystemHandler:
         self.Field_to_Table= lookUpTable.LookUpTable()
 
         if self.game.first =="E":
-            print("da")
+            print("human player satrts")
             self.aktion="waitUser"
             self.nextaktion="findUserInput"
 
 
 
 
-    def getEnemyMove(self):
-        #self.active="getEnemeyMove"
-        #self.neutrals=self.game.getNeutral()
-        #self.neutral_idx=0
-        #self.setGoal(self.neutrals[self.neutral_idx])
+    def getEnemyMove(self): #for testing
         b = input('Choose a number: ')
         return b
 
-    def checkField(self,idx):
-        print("mudda")
+
 
     def handleMessage(self,message):
-        res =[{}]
         print("in handle message")
-        message=json.loads(message.decode('utf-8'))
+        message=json.loads(message.decode('utf-8'))  #decode the the message
         print("message:")
         print(message)
 
         if(message.get('ID')=="System"):
+            print("NEEEEEEEEEEEEEEEEEEEEEE DAAAAAAAAAAAAA LOESCHEN")
             self.handleSystem(message)
-        if(message.get('Aktion')=="Test"):
+        if(message.get('Aktion')=="Test"): # for testing
             print("in test")
             return self.testHandler.handleMessage(message)
 
@@ -72,8 +67,6 @@ class SystemHandler:
                 return self.makeMove()
                 print("zug machen und schicken")
         if (message.get('Aktion') == "Befehl"):
-
-
             print(self.aktion)
             print(self.nextaktion)
 
@@ -91,27 +84,8 @@ class SystemHandler:
                 if self.aktivescan:
                     if message.get('found'):
                         inputvalue =self.Field_to_Table.lookUpTable(self.position)
-                        print(inputvalue)
-                        x = input("yours?")
-                        if x == "":
-                            move = self.game.getMove(inputvalue)
-                        else:
-                            move=self.game.getMove(int(x))
-                        self.target = self.Field_to_Table.lookUpField(move)
-                        way = self.findwholeway()
-                        message = self.default_message
-                        message['Aktion'] = "move"
-                        message['way'] = way
-                        print("return:")
-                        print(message)
-                        self.scanidx = 0
-                        self.aktivescan = False
 
-                        self.aktion = "sendprep"
-                        self.nextaktion = "sendprep"
-                        print("hinterhernim found")
-                        print(self.aktion)
-                        return message
+                        return self.endscan(inputvalue)
                     if self.scanidx >= len(self.neutrals):
                         x = input("where did you play?")
                         return self.endscan(x)
@@ -150,6 +124,7 @@ class SystemHandler:
 
 
             if self.game.game_on:
+                print("NEEEEEEEEEEEEEEEEEEEEEEEIN GAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAME ON")
                 self.game.print()
                 value = input("wählen sie ihr Feld: ")
                 move= self.game.getMove(int(value))
