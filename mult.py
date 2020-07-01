@@ -41,7 +41,7 @@ parser.add_argument('--back',type=bool,default=False,help='back!',required=False
 parser.add_argument('--way',type=str,help='way!',required=False)
 
 
-message=None
+messageOut=None
 def accept_wrapper(sock):
     conn, addr = sock.accept()  # Should be ready to read
     print('accepted connection from', addr)
@@ -49,62 +49,31 @@ def accept_wrapper(sock):
     data = types.SimpleNamespace(addr=addr, inb=b'', outb=b'')
     events = selectors.EVENT_READ | selectors.EVENT_WRITE
     sel.register(conn, events, data=data)
-def service_connection(key, mask):
-    sock = key.fileobj
-    data = key.data
-    data.out=message
-    recv_data=None
-    if mask & selectors.EVENT_READ:
-        print("in read")
-        recv_data = sock.recv(1024)  # Should be ready to read
-        if recv_data:
-            #data.outb += rein readcv_data
-            print(recv_data)
-            print("here???")
-            print("data")
-        else:
-            print('closing connection to', data.addr)
-            sel.unregister(sock)
-            sock.close()
-    if mask & selectors.EVENT_WRITE:
-        if data.outb:
-            print('echoing', repr(data.outb), 'to', data.addr)
-            sent = sock.send(data.outb)  # Should be ready to write
-            data.outb = data.outb[sent:]
-            print("server out after send: "+data.out)#delete
-    return recv_data
 
 
-def send(key, mask,mes):
+def send(key, mask, message):
     sock = key.fileobj
     data = key.data
     data.out = message
     print("send")
-
     if mask & selectors.EVENT_WRITE:
-        if mes:
-            print('echoing', repr(mes), 'to', data.addr)
-            if len(mes)>1000:
+        if message:
+            print('echoing', repr(message), 'to', data.addr)
+            if len(message)>1000:
                 print("ITS OVER 1000")
                 return False
-            sent = sock.send(mes)  # Should be ready to write
-            mes = data.outb[sent:]
-            print("server out after send: " + repr(mes))
+            sent = sock.send(message)  # Should be ready to write
+            message = data.outb[sent:]
+            print("server out after send: " + repr(message))
 def rec(key,mask):
     sock = key.fileobj
     data = key.data
-    data.out = message
-
+    data.out = messageOut
     recv_data = None
     if mask & selectors.EVENT_READ:
         print("in read")
         recv_data = sock.recv(1024)  # Should be ready to read
-
-       # print(recv_data)
         if recv_data:
-            # data.outb += recv_data
-            print("received Data:")
-            print(recv_data)
             return recv_data
         else:
             print('closing connection to', data.addr)
@@ -124,7 +93,7 @@ defaultM={'speed':pargs.speed,'time':pargs.time,'ms':pargs.ms,
                           }
 # ...
 
-message_handelr=SystemHandler(defaultM)
+MessageHandler=SystemHandler(defaultM)
 host = '192.168.0.179'  # The server's hostname or IP address
 port = 65432
 lsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -134,7 +103,7 @@ lsock.listen()
 print('listening on', (host, port))
 lsock.setblocking(False)
 sel.register(lsock, selectors.EVENT_READ, data=None)
-message=None
+messageOut=None
 while True:
     events = sel.select(timeout=None)
     for key, mask in events:
@@ -142,16 +111,11 @@ while True:
             accept_wrapper(key.fileobj)
         else:
             res=rec(key,mask) #receive the data
-
-
             if res != None:
-
-                message=message_handelr.handleMessage(res) # handle the message
-
-            if message !=None:
-                print("m!=NOne")
-                message=res_bytes = json.dumps(message).encode('utf-8')
-                message_handelr.printPos()
-                send(key,mask,message)
-                message=None
+                messageOut=MessageHandler.handleMessage(res) # handle the message
+            if messageOut !=None:
+                messageOut=res_bytes = json.dumps(messageOut).encode('utf-8')
+                MessageHandler.printPos()
+                send(key, mask, messageOut)
+                messageOut=None
 
