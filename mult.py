@@ -141,14 +141,12 @@ while True:
         if key.data is None:
             accept_wrapper(key.fileobj)
         else:
-            #print("in loop")
-            #m= TTT.doSomething(service_connectionTTT.doSomething(res)(key, mask))
-            res=rec(key,mask)
-           # print(res)TTT.doSomething(res)
+            res=rec(key,mask) #receive the data
+
 
             if res != None:
-                #print(res)
-                message=message_handelr.handleMessage(res)
+
+                message=message_handelr.handleMessage(res) # handle the message
 
             if message !=None:
                 print("m!=NOne")
