@@ -139,7 +139,9 @@ class GameHandler:
 
     def tagField(self, target_field, player):  #todo change turn
         print(player + " setzt " + str(target_field))
-        if self.field[target_field] != "N":
+        print(int(target_field))
+
+        if self.field[int(target_field)] != "N":
             return False
         self.field[target_field] = player
         self.turn = self.turn + 1  # danach (vielleich nocht wichtig)
