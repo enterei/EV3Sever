@@ -61,6 +61,7 @@ def service_connection(key, mask):
             #data.outb += rein readcv_data
             print(recv_data)
             print("here???")
+            print("data")
         else:
             print('closing connection to', data.addr)
             sel.unregister(sock)
@@ -70,7 +71,7 @@ def service_connection(key, mask):
             print('echoing', repr(data.outb), 'to', data.addr)
             sent = sock.send(data.outb)  # Should be ready to write
             data.outb = data.outb[sent:]
-            print("server out after send: "+data.out)
+            print("server out after send: "+data.out)#delete
     return recv_data
 
 
@@ -133,7 +134,6 @@ lsock.listen()
 print('listening on', (host, port))
 lsock.setblocking(False)
 sel.register(lsock, selectors.EVENT_READ, data=None)
-TTT=TTT()
 message=None
 while True:
     events = sel.select(timeout=None)

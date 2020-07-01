@@ -1,6 +1,6 @@
 from random import randrange
 
-v0 = [0, 1, 2]
+v0 = [0, 1, 2] #win conditions
 v1 = [3, 4, 5]
 v2 = [6, 7, 8]
 
@@ -19,7 +19,7 @@ class GameHandler:
 
     stragity = None
     winner = None
-    vcs = [v0, v1, v2, v3, v4, v5, v6, v7]  # Win Conwhile
+    vcs = [v0, v1, v2, v3, v4, v5, v6, v7]  # Win Condition
 
 
 
@@ -31,7 +31,7 @@ class GameHandler:
     def __init__(self, dM,kfirst="M", **kwargs):
         self.defaultMessage=dM
         self.first = kfirst
-        self.vcs = [v0, v1, v2, v3, v4, v5, v6, v7]
+        self.vcs = [v0, v1, v2, v3, v4, v5, v6, v7] # possible active winconditions
         self.my_oppertunitiy = []
         self.enemy_oppertunitiy = []
         self.winner = None

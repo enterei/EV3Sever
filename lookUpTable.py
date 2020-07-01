@@ -1,8 +1,7 @@
 class LookUpTable:
 
-    def lookUpField(self, idx):
-        print("looking up")
-        print(idx)
+    def lookUpField(self, idx): # given a field number, return field coordinates
+
         if (idx == 0):
             return [3, 0]
         if (idx == 1):

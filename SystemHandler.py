@@ -267,11 +267,8 @@ class SystemHandler:
            self.neutrals= self.game.getNeutral() #get array of neutral fields
            self.scanidx=0 #set index to 0
            self.aktivescan=True #set sacn to active
-       # lookUpTable.L
 
         self.target=self.Field_to_Table.lookUpField(self.neutrals[self.scanidx]) #target first field of the neutral array
-     #   self.Table.
-
         way=self.findwholeway(scan=True) #find the way
         message = self.default_message #build message
         message['Aktion'] = "scan"
@@ -302,7 +299,7 @@ class SystemHandler:
 
         return message
 
-    def printPos(self):
+    def printPos(self): # print position and orientation of robot
         print("position and orientation of robot")
         print(self.position)
         print(self.orientation)
