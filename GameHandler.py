@@ -149,7 +149,7 @@ class GameHandler:
 
         if self.field[int(target_field)] != "N":
             return False
-        self.field[target_field] = player
+        self.field[int(target_field)] = player
         self.turn = self.turn + 1  # danach (vielleich nocht wichtig)
         self.print()
 
