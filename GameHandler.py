@@ -53,6 +53,12 @@ class GameHandler:
         if enemy_option != None:
             print("enemy option: " + str(enemy_option))
             return enemy_option
+        if self.field[4]=="N":
+            return 4
+        corner_option = self.cornerOption()
+        if corner_option !=None:
+            return corner_option
+
 
         # if self.stragity != None:
         #   return self.getStragityMove() todo
@@ -201,9 +207,22 @@ class GameHandler:
 
         print(newres)
         return newres
+    def cornerOption(self):
+        neutral_corners=[]
+        if self.field[0]=="N":
+            neutral_corners.append(0)
+        if self.field[2]=="N":
+            neutral_corners.append(2)
+        if self.field[6]=="N":
+            neutral_corners.append(6)
+        if self.field[0]=="N":
+            neutral_corners.append(8)
+        idx = randrange(0, len(neutral_corners),1)
+        return neutral_corners[idx]
 
 
-def main():
+
+def main(): #main for testing gamelogic and KI without hte robot
     dm="ga"
 
     game = GameHandler(kfirst="E4",dM="ga")
