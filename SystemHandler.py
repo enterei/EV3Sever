@@ -65,12 +65,15 @@ class SystemHandler:
 
             if not self.game.game_on: #start new game
                 self.game = GameHandler(self.default_message)
-                message = self.sendwait()
-                message['gameEndSound'] = "True"
+
+
 
                 if self.game.first == "E":
                     self.aktion = "waitUser"
                     self.nextaktion = "findUserInput"
+            message = self.sendprep()
+            message['gameEndSound'] = "True"
+            return message
 
             if self.aktion=="waitUser": #send wait
                 return self.sendwait()
@@ -264,9 +267,6 @@ class SystemHandler:
         message = self.default_message
         message['Aktion'] = "move"
         message['way'] = way
-
-        message['gameEndSound'] = "True"
-        return message
         return message
     def handleScan(self): # handle the scan algorithm
         if not self.aktivescan:
