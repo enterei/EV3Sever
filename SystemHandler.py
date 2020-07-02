@@ -73,10 +73,7 @@ class SystemHandler:
                 if self.game.first == "E":
                     self.aktion = "waitUser"
                     self.nextaktion = "findUserInput"
-            print("vor sennd prep")
-            message = self.sendprep()
-            message['gameEndSound'] = "True"
-            return message
+
 
             if self.aktion=="waitUser": #send wait
                 return self.sendwait()
