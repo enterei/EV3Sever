@@ -26,6 +26,8 @@ class SystemHandler:
         self.orientation=[1,0] #orientation of robot
         self.next_corner = [None, None]
         self.game = GameHandler(defaultM,kfirst="E")  # todo default message    Gamhehandler handles the gamelogic and the AI of the robot
+        print("in constroktor")
+        print(self.game.game_on)
         self.target=[3,0]
         self.aktivescan=False
         self.scanidx = 0
@@ -61,7 +63,7 @@ class SystemHandler:
 
 
         if (message.get('Aktion') == "Befehl"): #determine in what state the server is to correctly respond
-
+            print(self.game.game_on)
 
             if not self.game.game_on: #start new game
                 self.game = GameHandler(self.default_message)
@@ -71,6 +73,7 @@ class SystemHandler:
                 if self.game.first == "E":
                     self.aktion = "waitUser"
                     self.nextaktion = "findUserInput"
+            print("vor sennd prep")
             message = self.sendprep()
             message['gameEndSound'] = "True"
             return message
