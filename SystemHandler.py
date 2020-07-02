@@ -31,6 +31,7 @@ class SystemHandler:
         self.scanidx = 0
         self.Field_to_Table= lookUpTable.LookUpTable() # class to cast from an edge to a field and back
 
+
         if self.game.first =="E":
             print("human player starts")
             self.aktion="waitUser"
@@ -67,7 +68,9 @@ class SystemHandler:
                 if self.game.first == "E":
                     self.aktion = "waitUser"
                     self.nextaktion = "findUserInput"
-
+                    message = self.sendwait()
+                    message['gameEndSound'] = "True"
+                    return message
             if self.aktion=="waitUser": #send wait
                 return self.sendwait()
 
