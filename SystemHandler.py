@@ -65,12 +65,15 @@ class SystemHandler:
 
             if not self.game.game_on: #start new game
                 self.game = GameHandler(self.default_message)
+                message = self.sendwait()
+                message['gameEndSound'] = "True"
+
                 if self.game.first == "E":
                     self.aktion = "waitUser"
                     self.nextaktion = "findUserInput"
-                    message = self.sendwait()
-                    message['gameEndSound'] = "True"
-                    return message
+                message = self.sendwait()
+                message['gameEndSound'] = "True"
+                return message
             if self.aktion=="waitUser": #send wait
                 return self.sendwait()
 
