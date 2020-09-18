@@ -6,7 +6,7 @@ import types
 
 from SystemHandler import SystemHandler
 from TTT import TTT
-parser = argparse.ArgumentParser(description="rosolve robo modes")
+parser = argparse.ArgumentParser(description="rosolve robot modes")
 
 
 
