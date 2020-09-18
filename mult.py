@@ -86,7 +86,7 @@ sel = selectors.DefaultSelector()
 pargs = parser.parse_args()
 
 defaultM={'speed':pargs.speed,'time':pargs.time,'ms':pargs.ms,
-                          'edgemax':pargs.cornerC ,'bscan':pargs.bscan,'edgev':pargs.cornervalue,
+                          'edgemax':pargs.corner ,'bscan':pargs.bscan,'edgev':pargs.cornervalue,
                           'ki':pargs.ki,'kd':pargs.kd,'kp':pargs.kp,
                           'turn':pargs.turn,'lspeed':pargs.turnls,'rspeed':pargs.turnrs,'degrees':pargs.initial_rot,
                           'rot':pargs.adjust_rot,'target_light_intensity':pargs.tlr,'way':pargs.way,'back':pargs.back,
