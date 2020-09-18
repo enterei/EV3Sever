@@ -39,7 +39,7 @@ parser.add_argument('--cmode',type=int,default=1,help='cmode!',required=False)# 
 parser.add_argument('--time',type=int,default=10,help='time!',required=False) #follow line for ms seconds
 parser.add_argument('--turn',type=bool,default=False,help='turn!',required=False)
 parser.add_argument('--bscan',type=bool,default=False,help='bscan!',required=False) #testing
-parser.add_argument('--port',type=str,default=65432,help='turn!',required=False)
+parser.add_argument('--port',type=int,default=65432,help='turn!',required=False)
 parser.add_argument('--host',type=str,default='192.168.0.179',help='bscan!',required=False) #testing
 
 
