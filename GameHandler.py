@@ -80,15 +80,15 @@ class GameHandler:
 
         if self.checkEnd():  # check if game ended  Enemy Won?
             return False
-        zug = self.thinkMove(new_marked_field_number)
-        if not self.tagField(zug, "M"):  # myMove
+        move = self.thinkMove(new_marked_field_number)
+        if not self.tagField(move, "M"):  # my Move
             print("Wrong move by M")
             self.wins("E")
-            return zug
+            return move
         if self.checkEnd():  # check if game ended I win
-            return zug
+            return move
 
-        return zug
+        return move
 
 
     def checkCondition(self, vc):

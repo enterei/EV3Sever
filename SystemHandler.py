@@ -25,9 +25,7 @@ class SystemHandler:
         self.position = [0,0] #position of robot
         self.orientation=[1,0] #orientation of robot
         self.next_corner = [None, None]
-        self.game = GameHandler(defaultM,kfirst="E")  # todo default message    Gamhehandler handles the gamelogic and the AI of the robot
-        print("in constroktor")
-        print(self.game.game_on)
+        self.game = GameHandler(defaultM,kfirst="E")
         self.target=[3,0]
         self.aktivescan=False
         self.scanidx = 0
@@ -82,7 +80,6 @@ class SystemHandler:
                 if self.aktivescan:
                     if message.get('found'): #merked field was found
                         inputvalue =self.Field_to_Table.lookUpTable(self.position)
-
                         return self.endscan(inputvalue)
                     if self.scanidx >= len(self.neutrals): # walked through whole field and npthing found
                         x = input("where did you play?")
